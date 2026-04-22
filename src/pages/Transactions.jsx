@@ -27,9 +27,6 @@ export default function Transactions() {
             <div className="container max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
 
                 <div className="text-center mb-12">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E4EB9C]/40 text-[#2D5128] text-[10px] font-black uppercase tracking-[0.2em] mb-4">
-                        <Activity size={14} /> Blockchain Readiness
-                    </div>
                     <h2 className="font-heading text-3xl md:text-5xl font-black text-slate-900 flex items-center justify-center gap-3 mb-4">
                         Public Ledger
                     </h2>

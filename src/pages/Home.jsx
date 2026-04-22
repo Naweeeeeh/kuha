@@ -26,9 +26,6 @@ export default function Home() {
       <section className="bg-white pb-16 md:pb-24 pt-16 overflow-hidden relative border-b border-[#8DA750]/20">
         <div className="container px-4 max-w-5xl mx-auto text-center">
           <div className="space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-700 py-4 flex flex-col items-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E4EB9C]/40 text-[#2D5128] text-[10px] font-black uppercase tracking-[0.2em] mb-4">
-              <ShieldCheck size={14} /> Official Portal
-            </div>
 
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl leading-tight">
               <span className="font-extrabold text-slate-800 tracking-tight">
@@ -44,7 +41,7 @@ export default function Home() {
             </h1>
 
             <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed text-slate-500 font-medium">
-              We are committed to delivering accessible, fast, and transparent services. Request your <strong className="text-slate-900 font-black">Certificate of Indigency</strong> and other official documents digitally.
+              We are committed to delivering accessible, fast, and transparent services. Request your <strong className="text-slate-900 font-black">Certificates</strong> and other official documents digitally.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-6 justify-center w-full">

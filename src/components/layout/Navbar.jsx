@@ -45,10 +45,9 @@ export default function Navbar({ isAdmin, onLogout }) {
                   Tuyom, City of Carcar, Cebu
               </span>
 
-                        {/* Admin Lock Button */}
                         {isAdmin && (
                             <button onClick={onLogout} className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-red-500 transition-colors bg-slate-50 px-2 py-1 rounded-md border border-slate-200 hover:border-red-200">
-                                <Lock size={12} /> Lock System
+                                Admin
                             </button>
                         )}
                     </div>
@@ -98,8 +97,8 @@ export default function Navbar({ isAdmin, onLogout }) {
                         </NavLink>
                     ))}
                     {isAdmin && (
-                        <button onClick={() => { onLogout(); setOpen(false); }} className="w-full mt-2 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-widest text-red-500 bg-red-50 py-3 rounded-xl">
-                            <Lock size={14} /> Lock System
+                        <button onClick={() => { onLogout(); setOpen(false); }} className="w-full mt-2 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-widest text-[#E4EB9C] bg-[#2D5128] py-3 rounded-xl">
+                            Admin
                         </button>
                     )}
                 </div>

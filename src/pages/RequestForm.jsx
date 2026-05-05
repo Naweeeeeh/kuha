@@ -14,7 +14,6 @@ export default function RequestForm() {
     const [loading, setLoading] = useState(false);
     const [resendTimer, setResendTimer] = useState(0);
 
-    // Explicitly defining documentType here
     const [formData, setFormData] = useState({
         documentType: 'Certificate of Indigency',
         fullName: '',
@@ -130,7 +129,7 @@ export default function RequestForm() {
             const uploadedImageUrl = publicUrlData.publicUrl;
 
             const { error: dbError } = await supabase.from('requests').insert([{
-                document_type: formData.documentType, // Saving explicit document type
+                document_type: formData.documentType,
                 full_name: formData.fullName,
                 age: parseInt(formData.age, 10),
                 purok: formData.purok,
@@ -200,7 +199,7 @@ export default function RequestForm() {
                                     <p className="text-sm text-slate-500 font-medium">Verify your email address to access the official document request forms.</p>
                                     <div className="text-left pt-4">
                                         <label className={labelClass}>Email Address</label>
-                                        <input required type="email" className={inputClass} placeholder="juan@gmail.com" value={email} onChange={e => setEmail(e.target.value)} />
+                                        <input required type="email" className={inputClass} value={email} onChange={e => setEmail(e.target.value)} />
                                     </div>
                                     <button type="submit" disabled={loading} className="w-full h-14 mt-4 inline-flex items-center justify-center rounded-xl bg-[#2D5128] text-white font-bold transition-all hover:bg-[#142C14] disabled:opacity-50 active:scale-[0.98]">
                                         {loading ? 'Sending Code...' : 'Send Verification Code'}
@@ -254,7 +253,7 @@ export default function RequestForm() {
                                         </select>
                                     </div>
 
-                                    <div className={`p-6 rounded-[2rem] border transition-colors ${!imageFile ? 'bg-red-50/50 border-red-100' : 'bg-slate-50/50 border-slate-100'}`}>
+                                    <div className={`p-6 rounded-[2rem] border transition-colors ${!imageFile ? 'bg-gray-100/50 border-[#2D5128]' : 'bg-slate-50/50 border-slate-100'}`}>
                                         <label className={labelClass + " mb-4 flex items-center gap-1"}>2x2 ID Picture Upload <span className="text-red-500 text-lg leading-none">*</span></label>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <div className="flex flex-col h-full">
@@ -263,7 +262,7 @@ export default function RequestForm() {
                                                         <input required type="file" accept="image/*" onChange={handleImageChange} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
                                                         <div className="w-14 h-14 bg-[#E4EB9C]/30 rounded-full flex items-center justify-center text-[#2D5128] mb-3 group-hover:scale-110 transition-transform"><Camera size={24} /></div>
                                                         <p className="text-sm font-bold text-[#142C14]">Click or tap to upload photo</p>
-                                                        <p className="text-xs text-red-500/80 font-bold mt-1 uppercase tracking-widest">Required to proceed</p>
+                                                        <p className="text-xs text-red-600/80 font-bold mt-1 uppercase tracking-widest">Required to proceed</p>
                                                     </div>
                                                 ) : (
                                                     <div className="relative w-full h-48 rounded-2xl overflow-hidden border-4 border-white shadow-xl group">
@@ -285,11 +284,11 @@ export default function RequestForm() {
                                     <div className="grid md:grid-cols-2 gap-6">
                                         <div>
                                             <label className={labelClass}>Full Name</label>
-                                            <input required type="text" className={inputClass} placeholder="Juan Dela Cruz" value={formData.fullName} onChange={e => setFormData({...formData, fullName: e.target.value})} />
+                                            <input required type="text" className={inputClass} value={formData.fullName} onChange={e => setFormData({...formData, fullName: e.target.value})} />
                                         </div>
                                         <div>
                                             <label className={labelClass}>Age</label>
-                                            <input required type="number" className={inputClass} placeholder="18" value={formData.age} onChange={e => setFormData({...formData, age: e.target.value})} />
+                                            <input required type="number" className={inputClass} value={formData.age} onChange={e => setFormData({...formData, age: e.target.value})} />
                                         </div>
                                     </div>
 
@@ -302,6 +301,7 @@ export default function RequestForm() {
                                                 <option value="Buongon">Buongon</option>
                                                 <option value="Caimito">Caimito</option>
                                                 <option value="Chicos">Chicos</option>
+                                                <option value="Mangga">Mangga</option>
                                                 <option value="Nangka">Nangka</option>
                                                 <option value="Tambis">Tambis</option>
                                                 <option value="Tisa">Tisa</option>
@@ -309,7 +309,7 @@ export default function RequestForm() {
                                         </div>
                                         <div>
                                             <label className={labelClass}>Purpose</label>
-                                            <input required type="text" className={inputClass} placeholder="Scholarship Application" value={formData.purpose} onChange={e => setFormData({...formData, purpose: e.target.value})} />
+                                            <input required type="text" className={inputClass} value={formData.purpose} onChange={e => setFormData({...formData, purpose: e.target.value})} />
                                         </div>
                                     </div>
 
@@ -340,7 +340,6 @@ export default function RequestForm() {
                                             <div className="flex flex-col items-center">
                                                 <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Your digital certificate is ready</p>
 
-                                                {/* THE FIX: Forcing React to see the raw documentType right here */}
                                                 <PDFDownloadLink
                                                     key={`${formData.documentType}-${formData.fullName}-${Date.now()}`}
                                                     document={<CertificatePDF docType={formData.documentType} data={formData} />}
@@ -358,7 +357,8 @@ export default function RequestForm() {
                                             <div className="flex flex-col items-center">
                                                 <div className="w-14 h-14 bg-[#E4EB9C]/40 rounded-xl flex items-center justify-center text-[#2D5128] mb-4"><MapPin size={24} /></div>
                                                 <h4 className="font-heading font-black text-[#142C14] text-xl mb-2">Onsite Pickup</h4>
-                                                <p className="text-sm text-slate-500 font-medium leading-relaxed max-w-xs">Proceed to the Barangay Tuyom Hall during office hours. Present your valid ID upon claiming.</p>
+                                                <p className="text-sm text-slate-500 font-medium leading-relaxed max-w-xs">Proceed to Tuyom Barangay Hall during office hours. Present your valid ID upon claiming.</p>
+
                                             </div>
                                         )}
                                     </div>

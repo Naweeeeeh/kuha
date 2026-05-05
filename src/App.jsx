@@ -19,7 +19,6 @@ export default function App() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    // --- ADMIN AUTHENTICATION STATE ---
     const [isAdmin, setIsAdmin] = useState(localStorage.getItem('secretary_auth') === 'true');
     const [showAuthModal, setShowAuthModal] = useState(false);
     const [password, setPassword] = useState('');
@@ -28,14 +27,13 @@ export default function App() {
     const handleLogin = (e) => {
         e.preventDefault();
 
-        // The Master Password
         if (password === tuyomPassword) {
             localStorage.setItem('secretary_auth', 'true');
             setIsAdmin(true);
             setShowAuthModal(false);
             setPassword('');
             setError('');
-            navigate('/admin-logs'); // Auto-redirect to logs upon success
+            navigate('/admin-logs');
         } else {
             setError('Incorrect password. Access denied.');
         }
@@ -44,7 +42,7 @@ export default function App() {
     const handleLogout = () => {
         localStorage.removeItem('secretary_auth');
         setIsAdmin(false);
-        navigate('/'); // Bounce them to home when they lock the system
+        navigate('/');
     };
 
     return (
@@ -82,15 +80,14 @@ export default function App() {
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#142C14]/40 backdrop-blur-sm animate-in fade-in duration-300">
                     <div className="bg-white rounded-[2rem] p-8 w-full max-w-sm shadow-2xl border border-[#8DA750]/20 animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
                         <div className="flex justify-between items-start mb-6">
-                            <div className="w-12 h-12 bg-[#E4EB9C]/40 flex items-center justify-center rounded-xl text-[#2D5128]">
-                                <Lock size={24} />
+                            <div className="w-12 h-12 bg-white-100/40 rounded-xl text-[#2D5128]">
+                                <h3 className="font-heading font-black flex text-2xl text-[#142C14] mb-2">Secretary Login</h3>
                             </div>
                             <button onClick={() => { setShowAuthModal(false); setError(''); setPassword(''); }} className="p-2 text-slate-400 hover:text-red-500 rounded-full hover:bg-red-50 transition-colors">
                                 <X size={20} />
                             </button>
                         </div>
 
-                        <h3 className="font-heading font-black text-2xl text-[#142C14] mb-2">Secretary Login</h3>
                         <p className="text-sm text-slate-500 font-medium mb-6">Enter the master password to access the Barangay logs and records.</p>
 
                         <form onSubmit={handleLogin} className="space-y-4">

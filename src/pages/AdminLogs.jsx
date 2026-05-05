@@ -253,9 +253,6 @@ export default function AdminLogs() {
             {successModal.show && (
                 <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-[#142C14]/80 backdrop-blur-sm animate-in fade-in duration-300">
                     <div className="bg-white rounded-[2rem] p-8 w-full max-w-md shadow-2xl border border-[#8DA750]/20 text-center animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
-                        <div className="w-16 h-16 bg-[#E4EB9C]/40 flex items-center justify-center rounded-2xl mx-auto text-[#2D5128] mb-6">
-                            <CheckCircle2 size={32} />
-                        </div>
                         <h3 className="font-heading font-black text-2xl text-[#142C14] mb-2">Transaction Successful!</h3>
                         <p className="text-sm text-slate-500 font-medium leading-relaxed mb-6">
                             The document record has been permanently secured on the Cardano blockchain.

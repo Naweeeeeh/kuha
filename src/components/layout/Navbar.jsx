@@ -29,7 +29,7 @@ export default function Navbar({ isAdmin, onLogout }) {
     const links = [
         { label: "Home", href: "/" },
         { label: "Public Ledger", href: "/transactions" },
-        ...(isAdmin ? [{ label: "Secretary Logs", href: "/admin-logs" }] : []),
+        ...(isAdmin ? [{ label: "Secretary Logs", href: "/admin" }] : []),
         { label: "Request Document", href: "/request", isCta: true },
     ];
 

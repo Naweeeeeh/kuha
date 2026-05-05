@@ -30,7 +30,6 @@ export default function AdminLogs() {
 
     useEffect(() => {
         fetchLogs();
-
         const savedWalletName = localStorage.getItem('cardano_wallet_name');
         if (walletAddress && savedWalletName) {
             let attempts = 0;
@@ -91,7 +90,7 @@ export default function AdminLogs() {
             setAvailableWallets(wallets);
             setShowWalletModal(true);
         } catch (err) {
-            setErrorModal({ show: true, message: "Could not detect any Cardano wallets in this browser." });
+            setErrorModal({ show: true, message: "Could not detect any Cardano wallets in this browser." + err.message });
         }
     };
 
@@ -171,7 +170,7 @@ export default function AdminLogs() {
                 l.id === log.id ? { ...l, tx_hash: txHash, status: 'On-Chain' } : l
             ));
 
-            localStorage.setItem('cardano_connected_time', Date.now().toString());
+            localStorage.setItem('cardano_connected_time', Date.now().toString()); // giakpoy ko
             setSuccessModal({ show: true, hash: txHash });
 
         } catch (err) {

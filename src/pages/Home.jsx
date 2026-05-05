@@ -22,7 +22,6 @@ export default function Home() {
 
   return (
     <div className="flex flex-col flex-grow bg-white pb-24">
-      {/* Hero Section */}
       <section className="bg-white pb-16 md:pb-24 pt-16 overflow-hidden relative border-b border-[#8DA750]/20">
         <div className="container px-4 max-w-5xl mx-auto text-center">
           <div className="space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-700 py-4 flex flex-col items-center">
@@ -68,7 +67,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Grid Section matching the exact overlapping badge style */}
       <section id="services" className="container max-w-7xl mx-auto px-4 mt-16 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300">
         <div className="grid md:grid-cols-3 gap-8">
           {cards.map((c) => (
@@ -76,11 +74,9 @@ export default function Home() {
               key={c.title}
               className="group relative bg-white rounded-[2.5rem] p-5 md:p-6 flex flex-col shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[#142C14]/50 cursor-pointer"
             >
-              {/* Visual Container (Replaces Image) */}
               <div className="relative w-full h-48 mb-12 rounded-[1.8rem] overflow-hidden bg-slate-50 flex items-center justify-center border border-slate-100">
                 <c.icon size={80} className="text-[#E4EB9C] opacity-50 group-hover:scale-110 transition-transform duration-700" />
 
-                {/* Overlapping Badge */}
                 <div className="absolute bottom-2 left-6 w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg border-[6px] border-white z-10 group-hover:-translate-y-1 transition-transform duration-300">
                   <div className="w-full h-full bg-[#E4EB9C]/30 rounded-xl flex items-center justify-center text-[#2D5128] transition-colors group-hover:bg-[#2D5128] group-hover:text-[#E4EB9C]">
                     <c.icon size={22} strokeWidth={2.5} />

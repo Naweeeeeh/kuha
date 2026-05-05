@@ -92,7 +92,7 @@ export default function RequestForm() {
             if (error) throw error;
             setStep(3);
         } catch (err) {
-            showModal("Invalid OTP. Please check your email and try again.", "error");
+            showModal("Invalid OTP. Please check your email and try again." + err.message, "error");
         } finally {
             setLoading(false);
         }

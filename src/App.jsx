@@ -33,7 +33,7 @@ export default function App() {
             setShowAuthModal(false);
             setPassword('');
             setError('');
-            navigate('/admin-logs');
+            navigate('/admin');
         } else {
             setError('Incorrect password. Access denied.');
         }
@@ -48,7 +48,6 @@ export default function App() {
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col font-sans relative">
 
-            {/* Pass the states to Navbar */}
             <Navbar isAdmin={isAdmin} onLogout={handleLogout} />
 
             <AnimatePresence mode="wait">
@@ -57,9 +56,7 @@ export default function App() {
                     <Route path="/" element={<PageTransition><Home /></PageTransition>} />
                     <Route path="/request" element={<PageTransition><RequestForm /></PageTransition>} />
                     <Route path="/transactions" element={<PageTransition><Transactions /></PageTransition>} />
-
-                    {/* Protected Route: If they aren't admin, bounce them to Home */}
-                    <Route path="/admin-logs" element={
+                    <Route path="/admin" element={
                         isAdmin ? <PageTransition><AdminLogs /></PageTransition> : <Navigate to="/" replace />
                     } />
 

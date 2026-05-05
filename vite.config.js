@@ -19,4 +19,7 @@ export default defineConfig({
         topLevelAwait(),
         nodePolyfills()
     ],
+    build: {
+        target: 'esnext',
+    }
 })

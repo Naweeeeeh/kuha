@@ -115,6 +115,7 @@ export default function RequestForm() {
         e.preventDefault();
 
         if (!imageFile) return showModal("A 2x2 ID picture is strictly required to process your document.", "error");
+        if (!formData.age || parseInt(formData.age, 10) < 0) return showModal("Age must be a valid positive number.", "error");
 
         setLoading(true);
         try {
@@ -155,7 +156,7 @@ export default function RequestForm() {
 
     const inputClass = "w-full mt-2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 font-medium focus:ring-2 focus:ring-[#2D5128] focus:border-transparent outline-none transition-all shadow-sm";
     const labelClass = "block text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest pl-1 leading-snug";
-    const isSubmitDisabled = !imageFile || loading;
+    const isSubmitDisabled = !imageFile || loading || !formData.age || parseInt(formData.age, 10) < 0;
 
     return (
         <section className="bg-white py-16 px-4 border-y border-[#8DA750]/30 flex-1 flex flex-col justify-center relative">
@@ -289,6 +290,9 @@ export default function RequestForm() {
                                         <div>
                                             <label className={labelClass}>Age</label>
                                             <input required type="number" className={inputClass} value={formData.age} onChange={e => setFormData({...formData, age: e.target.value})} />
+                                            {formData.age && parseInt(formData.age, 10) < 0 && (
+                                                <p className="text-red-500 text-xs font-bold mt-2">Invalid Age</p>
+                                            )}
                                         </div>
                                     </div>
 

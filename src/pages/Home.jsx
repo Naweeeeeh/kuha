@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Building, Target, PhoneCall, FileText, ChevronDown, MapPin, Users, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 import barangayLandscape from '../assets/barangaylandscape.png';
+import ourHeritageImg from "../assets/our-heritage-img.jpeg";
+import missionVisionImg from "../assets/mission-vision-img.jpg";
+import emergencyLinesImg from "../assets/emergency-lines-img.jpg";
 
 export default function Home() {
   const cards = [
@@ -9,7 +12,7 @@ export default function Home() {
       icon: Building,
       title: "Our Heritage",
       desc: "Explore the rich history and cultural landmarks of our beloved barangay.",
-      imgUrl: "https://images.unsplash.com/photo-1518998053401-b264d50ebf92?q=80&w=600&auto=format&fit=crop",
+      imgUrl: ourHeritageImg,
       iconColor: "text-emerald-600",
       iconBg: "bg-emerald-100/80"
     },
@@ -17,7 +20,7 @@ export default function Home() {
       icon: Target,
       title: "Vision & Mission",
       desc: "A progressive community promoting sustainable development and inclusivity.",
-      imgUrl: "https://images.unsplash.com/photo-1523531294919-4bab31a28a38?q=80&w=600&auto=format&fit=crop",
+      imgUrl: missionVisionImg,
       iconColor: "text-amber-600",
       iconBg: "bg-amber-100/80"
     },
@@ -25,7 +28,7 @@ export default function Home() {
       icon: PhoneCall,
       title: "Emergency Lines",
       desc: "Reach the Punong Barangay office directly for immediate assistance.",
-      imgUrl: "https://images.unsplash.com/photo-1584061806338-79549f425bce?q=80&w=600&auto=format&fit=crop",
+      imgUrl: emergencyLinesImg,
       iconColor: "text-rose-600",
       iconBg: "bg-rose-100/80"
     },
@@ -124,13 +127,13 @@ export default function Home() {
           className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
           {stats.map((stat, idx) => (
-            <div key={idx} className="bg-white/95 backdrop-blur-xl rounded-[2rem] p-6 md:p-8 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] border border-white flex items-center gap-6 transition-transform hover:-translate-y-1">
+            <div key={idx} className="bg-[#0C2418] hover:bg-[#14613b] backdrop-blur-xl rounded-[2rem] p-6 border-5 border-white/95 md:p-8 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] flex items-center gap-6 transition-transform hover:-translate-y-1">
               <div className="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 shrink-0 shadow-inner">
                 <stat.icon size={32} strokeWidth={2} />
               </div>
               <div>
-                <div className="text-3xl md:text-4xl font-extrabold text-stone-800 tracking-tight">{stat.value}</div>
-                <div className="text-sm font-semibold text-stone-500 uppercase tracking-wider mt-1">{stat.label}</div>
+                <div className="text-3xl md:text-4xl font-extrabold text-white/90 tracking-tight">{stat.value}</div>
+                <div className="text-sm font-semibold text-white/80 uppercase tracking-wider mt-1">{stat.label}</div>
               </div>
             </div>
           ))}
@@ -175,18 +178,20 @@ export default function Home() {
 
         {/* EXPLORE SECTION */}
         <div className="mb-10">
+          <h2 className="text-[56px] text-center mx-auto font-bold text-emerald-800 uppercase tracking-widest padding-bottom-4 mb-12 relative">
+                  Discover
+          </h2>
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            
             <div className="max-w-2xl">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-3 mb-4"
+                className="flex items-center w-full justify-center gap-3 mb-4"
               >
-                <span className="w-10 h-[2px] bg-emerald-500"></span>
-                <h2 className="text-sm font-bold text-emerald-600 uppercase tracking-widest">
-                  Discover
-                </h2>
+                
+                
               </motion.div>
               <motion.h3
                 initial={{ opacity: 0, y: 20 }}

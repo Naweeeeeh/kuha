@@ -91,8 +91,10 @@ export default function VisionMission() {
             </motion.p>
 
             <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight leading-[1.05] mb-6">
-              Vision & <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-emerald-100">
+                Vision
+              </span> & <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E17100] via-yellow to-white">
                 Mission
               </span>
             </motion.h1>
@@ -131,7 +133,7 @@ export default function VisionMission() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="text-emerald-600 font-bold text-lg uppercase tracking-wider mb-3"
+              className="text-emerald-600 font-bold text-[36px] uppercase tracking-wider mb-3 pb-8"
             >
               Our Vision
             </motion.p>
@@ -148,7 +150,7 @@ export default function VisionMission() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-xl text-stone-600 leading-relaxed max-w-3xl"
+              className="text-xl text-stone-600 leading-relaxed max-w-full text-justify"
             >
               We envision Barangay Tuyom as a thriving community where sustainable development, environmental stewardship, and social inclusivity converge. A place where every resident is empowered to contribute, where opportunities abound, and where our shared commitment to progress creates lasting positive change for generations to come.
             </motion.p>
@@ -203,7 +205,7 @@ export default function VisionMission() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="text-amber-600 font-bold text-lg uppercase tracking-wider mb-3"
+              className="text-amber-600 font-bold text-[36px] uppercase tracking-wider mb-3 pb-8"
             >
               Our Mission
             </motion.p>
@@ -220,7 +222,7 @@ export default function VisionMission() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-xl text-stone-600 leading-relaxed max-w-3xl"
+              className="text-xl text-stone-600 leading-relaxed max-w-full text-justify"
             >
               To serve all residents with integrity, transparency, and dedication. We commit to delivering responsive public services, promoting community engagement, and implementing programs that address the needs of every family while fostering pride in our barangay.
             </motion.p>
@@ -280,10 +282,10 @@ export default function VisionMission() {
             </div>
 
             <Link
-              to="/request"
+              to="mailto:valencia.judemikaell@gmail.com"
               className="group w-full md:w-auto flex items-center justify-center gap-3 bg-emerald-500 text-white py-5 px-10 rounded-full font-bold text-xl shadow-[0_8px_30px_0_rgba(16,185,129,0.3)] transition-all hover:scale-105 hover:bg-emerald-400 shrink-0"
             >
-              <span>Get Involved</span>
+              <span>Mail Us</span>
               <ArrowRight size={26} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

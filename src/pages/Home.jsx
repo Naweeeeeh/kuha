@@ -1,101 +1,265 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Building, Target, PhoneCall, ShieldCheck } from "lucide-react";
+import { ArrowRight, Building, Target, PhoneCall, FileText, ChevronDown, MapPin, Users, Heart } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const cards = [
     {
       icon: Building,
-      title: "Our History",
-      desc: "Discover the rich history and cultural heritage of our beloved barangay in Carcar City."
+      title: "Our Heritage",
+      desc: "Explore the rich history and cultural landmarks of our beloved barangay.",
+      imgUrl: "https://images.unsplash.com/photo-1518998053401-b264d50ebf92?q=80&w=600&auto=format&fit=crop",
+      iconColor: "text-emerald-600",
+      iconBg: "bg-emerald-100/80"
     },
     {
       icon: Target,
       title: "Vision & Mission",
-      desc: "A progressive community promoting sustainable development and inclusivity."
+      desc: "A progressive community promoting sustainable development and inclusivity.",
+      imgUrl: "https://images.unsplash.com/photo-1523531294919-4bab31a28a38?q=80&w=600&auto=format&fit=crop",
+      iconColor: "text-amber-600",
+      iconBg: "bg-amber-100/80"
     },
     {
       icon: PhoneCall,
-      title: "Emergency Contact",
-      desc: "Reach the Punong Barangay office directly for immediate assistance and public safety cases."
+      title: "Emergency Lines",
+      desc: "Reach the Punong Barangay office directly for immediate assistance.",
+      imgUrl: "https://images.unsplash.com/photo-1584061806338-79549f425bce?q=80&w=600&auto=format&fit=crop",
+      iconColor: "text-rose-600",
+      iconBg: "bg-rose-100/80"
     },
   ];
 
+  const stats = [
+    { label: "Residents", value: "12,450+", icon: Users },
+    { label: "Puroks", value: "8", icon: MapPin },
+    { label: "Community Programs", value: "24+", icon: Heart },
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+  };
+
   return (
-    <div className="flex flex-col flex-grow bg-white pb-24">
-      <section className="bg-white pb-16 md:pb-24 pt-16 overflow-hidden relative border-b border-[#8DA750]/20">
-        <div className="container px-4 max-w-5xl mx-auto text-center">
-          <div className="space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-700 py-4 flex flex-col items-center">
+    <div className="min-h-screen bg-stone-50 font-sans pb-24 selection:bg-emerald-200 selection:text-emerald-900">
 
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl leading-tight">
-              <span className="font-extrabold text-slate-800 tracking-tight">
-                Welcome to
+      {/* HERO SECTION */}
+      <section className="relative min-h-[85vh] flex flex-col justify-center overflow-hidden bg-[#0A2318]">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1542274368-443d694d79aa?q=80&w=2000&auto=format&fit=crop"
+            alt="Barangay Landscape"
+            className="w-full h-full object-cover opacity-40 scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A2318] via-[#0A2318]/70 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A2318]/90 via-[#0A2318]/40 to-transparent"></div>
+        </div>
+
+        <div className="max-w-6xl mx-auto px-6 w-full relative z-10 pt-8 pb-32">
+          <motion.div
+            initial="hidden"
+            animate="show"
+            variants={containerVariants}
+            className="max-w-3xl"
+          >
+            <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight leading-[1.05] mb-6">
+              Maayong Adlaw, <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-emerald-100">
+                Barangay Tuyom
               </span>
-              <br />
-              <span
-                className="font-black tracking-tighter bg-gradient-to-r from-[#142C14] to-[#537B2F] bg-clip-text text-transparent"
-                style={{ WebkitTextStroke: "1.2px transparent" }}
-              >
-                Barangay Tuyom.
-              </span>
-            </h1>
+            </motion.h1>
 
-            <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed text-slate-500 font-medium">
-              We are committed to delivering accessible, fast, and transparent services. Request your <strong className="text-slate-900 font-black">Certificates</strong> and other official documents digitally.
-            </p>
+            <motion.p variants={itemVariants} className="text-lg md:text-xl text-emerald-50 max-w-xl leading-relaxed mb-10 font-medium">
+              Serbisyo para sa tanan. Experience a progressive, inclusive, and sustainable community where every resident matters.
+            </motion.p>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-6 justify-center w-full">
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4">
               <Link
                 to="/request"
-                className="relative group w-full sm:w-[280px] h-14 inline-flex items-center justify-center rounded-xl bg-[#2D5128] text-white font-bold transition-all hover:bg-[#142C14] hover:shadow-xl hover:shadow-[#142C14]/20 active:scale-[0.98]"
+                className="group relative inline-flex items-center justify-center gap-3 bg-emerald-500 text-white px-8 py-4 rounded-full font-bold text-lg overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(16,185,129,0.4)] focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-[#0A2318]"
               >
-                <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-4 w-4 border-2 border-white bg-red-500 shadow-sm"></span>
-                </span>
-                Request Document
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
+                <FileText size={22} className="relative z-10" />
+                <span className="relative z-10">Request Document</span>
+                <ArrowRight size={22} className="relative z-10 transition-transform group-hover:translate-x-1" />
               </Link>
-
-              <a
-                href="#services"
-                className="w-full sm:w-[280px] h-14 inline-flex items-center justify-center rounded-xl border-2 border-[#2D5128] text-[#2D5128] font-bold transition-all hover:bg-[#E4EB9C]/30 hover:border-[#142C14] hover:text-[#142C14] active:scale-[0.98]"
-              >
-                View Services
-              </a>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 flex flex-col items-center gap-2"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ChevronDown size={24} />
+          </motion.div>
+        </motion.div>
       </section>
 
-      <section id="services" className="container max-w-7xl mx-auto px-4 mt-16 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300">
-        <div className="grid md:grid-cols-3 gap-8">
-          {cards.map((c) => (
-            <div
-              key={c.title}
-              className="group relative bg-white rounded-[2.5rem] p-5 md:p-6 flex flex-col shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[#142C14]/50 cursor-pointer"
-            >
-              <div className="relative w-full h-48 mb-12 rounded-[1.8rem] overflow-hidden bg-slate-50 flex items-center justify-center border border-slate-100">
-                <c.icon size={80} className="text-[#E4EB9C] opacity-50 group-hover:scale-110 transition-transform duration-700" />
-
-                <div className="absolute bottom-2 left-6 w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg border-[6px] border-white z-10 group-hover:-translate-y-1 transition-transform duration-300">
-                  <div className="w-full h-full bg-[#E4EB9C]/30 rounded-xl flex items-center justify-center text-[#2D5128] transition-colors group-hover:bg-[#2D5128] group-hover:text-[#E4EB9C]">
-                    <c.icon size={22} strokeWidth={2.5} />
-                  </div>
-                </div>
+      {/* STATS SECTION (Floating over hero transition) */}
+      <div className="max-w-6xl mx-auto px-6 relative z-20 -mt-16 mb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        >
+          {stats.map((stat, idx) => (
+            <div key={idx} className="bg-white/95 backdrop-blur-xl rounded-[2rem] p-6 md:p-8 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] border border-white flex items-center gap-6 transition-transform hover:-translate-y-1">
+              <div className="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 shrink-0 shadow-inner">
+                <stat.icon size={32} strokeWidth={2} />
               </div>
-
-              <div className="px-3 pb-2 flex-1 flex flex-col">
-                <h3 className="font-heading font-black text-[#142C14] text-xl mb-3 leading-tight group-hover:text-[#2D5128] transition-colors">
-                  {c.title}
-                </h3>
-                <p className="text-sm text-[#142C14]/70 leading-relaxed font-medium flex-1">
-                  {c.desc}
-                </p>
+              <div>
+                <div className="text-3xl md:text-4xl font-extrabold text-stone-800 tracking-tight">{stat.value}</div>
+                <div className="text-sm font-semibold text-stone-500 uppercase tracking-wider mt-1">{stat.label}</div>
               </div>
             </div>
           ))}
+        </motion.div>
+      </div>
+
+      {/* MAIN CONTENT AREA */}
+      <div className="max-w-6xl mx-auto px-6">
+
+        {/* QUICK ACTION CARD (Moved near top for easy access) */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.7 }}
+          className="relative bg-stone-900 rounded-[3rem] p-10 md:p-16 overflow-hidden shadow-2xl mb-24"
+        >
+          {/* Decorative background elements */}
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(circle_at_top_right,_rgba(16,185,129,0.15),_transparent_60%)] -translate-y-1/2 translate-x-1/3"></div>
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle_at_bottom_left,_rgba(16,185,129,0.1),_transparent_50%)] translate-y-1/3 -translate-x-1/4"></div>
+
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
+            <div className="text-center md:text-left max-w-2xl">
+              <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-5 leading-tight">
+                Need official documents?
+              </h2>
+              <p className="text-stone-400 text-lg md:text-xl leading-relaxed">
+                Request your barangay clearance, indigency, and residency online without the hassle. Fast, secure, and ready when you are.
+              </p>
+            </div>
+
+            <Link
+              to="/request"
+              className="group w-full md:w-auto flex items-center justify-center gap-3 bg-emerald-500 text-white py-5 px-10 rounded-full font-bold text-xl shadow-[0_8px_30px_0_rgba(16,185,129,0.3)] transition-all hover:scale-105 hover:bg-emerald-400 shrink-0"
+            >
+              <FileText size={26} className="group-hover:scale-110 transition-transform" />
+              <span>Start Request</span>
+              <ArrowRight size={26} className="ml-1 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </motion.div>
+
+        {/* EXPLORE SECTION */}
+        <div className="mb-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div className="max-w-2xl">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="flex items-center gap-3 mb-4"
+              >
+                <span className="w-10 h-[2px] bg-emerald-500"></span>
+                <h2 className="text-sm font-bold text-emerald-600 uppercase tracking-widest">
+                  Discover
+                </h2>
+              </motion.div>
+              <motion.h3
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-4xl md:text-5xl font-extrabold text-stone-800 tracking-tight"
+              >
+                Explore Barangay Tuyom
+              </motion.h3>
+            </div>
+            <motion.button
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-emerald-600 font-bold hover:text-emerald-700 flex items-center gap-2 group transition-colors text-lg"
+            >
+              View all programs
+              <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
+            </motion.button>
+          </div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
+            {cards.map((c, i) => (
+              <motion.div
+                key={c.title}
+                variants={itemVariants}
+                whileHover={{ y: -8 }}
+                className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] border border-stone-100 overflow-hidden flex flex-col group cursor-pointer transition-shadow duration-300"
+              >
+                {/* Image Header */}
+                <div className="h-64 w-full relative overflow-hidden bg-stone-200">
+                  <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
+                  <img
+                    src={c.imgUrl}
+                    alt={c.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  {/* Floating Icon Badge */}
+                  <div className="absolute top-5 right-5 p-3.5 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl z-20 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
+                    <div className={`${c.iconColor}`}>
+                      <c.icon size={26} strokeWidth={2.5} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content Area */}
+                <div className="p-8 flex flex-col flex-1 relative bg-white">
+                  {/* Decorative background shape */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-stone-50 rounded-bl-full -z-10 transition-transform duration-700 group-hover:scale-150 opacity-50"></div>
+
+                  <h4 className="font-extrabold text-stone-800 text-2xl mb-3 group-hover:text-emerald-600 transition-colors">
+                    {c.title}
+                  </h4>
+                  <p className="text-stone-500 text-base leading-relaxed flex-1">
+                    {c.desc}
+                  </p>
+
+                  <div className="mt-8 flex items-center gap-2 text-sm font-bold text-stone-400 group-hover:text-emerald-600 transition-colors uppercase tracking-widest">
+                    Learn more
+                    <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
-      </section>
+
+      </div>
     </div>
   );
 }

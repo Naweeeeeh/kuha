@@ -209,7 +209,7 @@ export default function AdminLogs() {
                         <div className="flex flex-col gap-3">
                             {availableWallets.length === 0 ? (
                                 <div className="p-4 bg-orange-50 text-orange-700 rounded-xl text-sm font-bold text-center border border-orange-100">
-                                    No Cardano wallets detected. Please install a wallet extension like Lace, Nami, or Eternl.
+                                    No wallet detected
                                 </div>
                             ) : (
                                 availableWallets.map(w => (

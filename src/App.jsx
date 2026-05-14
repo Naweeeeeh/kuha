@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import RequestForm from './pages/RequestForm';
 import Transactions from './pages/Transactions';
 import AdminLogs from './pages/AdminLogs';
+import HeritagePage from './pages/HeritagePage';
 
 const tuyomPassword = import.meta.env.VITE_TUYOMPASSWORD
 
@@ -56,6 +57,7 @@ export default function App() {
                     <Route path="/" element={<PageTransition><Home /></PageTransition>} />
                     <Route path="/request" element={<PageTransition><RequestForm /></PageTransition>} />
                     <Route path="/transactions" element={<PageTransition><Transactions /></PageTransition>} />
+                    <Route path="/heritage" element={<PageTransition><HeritagePage /></PageTransition>} />
                     <Route path="/admin" element={
                         isAdmin ? <PageTransition><AdminLogs /></PageTransition> : <Navigate to="/" replace />
                     } />

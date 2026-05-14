@@ -131,7 +131,7 @@ export default function Home() {
           className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
           {stats.map((stat, idx) => (
-            <div key={idx} className="bg-[#0C2418] hover:bg-[#14613b] backdrop-blur-xl rounded-[2rem] p-6 border-5 border-white/95 md:p-8 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] flex items-center gap-6 transition-transform hover:-translate-y-1">
+            <div key={idx} className="bg-[#0C2418] hover:bg-[#14613b] backdrop-blur-xl rounded-[2rem] p-6 border-5 border-white/95 md:p-8 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] flex items-center gap-6 transition-all duration-300 hover:-translate-y-1">
               <div className="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 shrink-0 shadow-inner">
                 <stat.icon size={32} strokeWidth={2} />
               </div>

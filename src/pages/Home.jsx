@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Building, Target, PhoneCall, FileText, ChevronDown, MapPin, Users, Heart } from "lucide-react";
 import { motion } from "framer-motion";
+import barangayLandscape from '../assets/barangaylandscape.png';
 
 export default function Home() {
   const cards = [
@@ -57,7 +58,7 @@ export default function Home() {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1542274368-443d694d79aa?q=80&w=2000&auto=format&fit=crop"
+            src={barangayLandscape}
             alt="Barangay Landscape"
             className="w-full h-full object-cover opacity-40 scale-105"
           />

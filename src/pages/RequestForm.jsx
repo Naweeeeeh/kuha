@@ -115,7 +115,7 @@ export default function RequestForm() {
         e.preventDefault();
 
         if (!imageFile) return showModal("A 2x2 ID picture is strictly required to process your document.", "error");
-        if (!formData.age || parseInt(formData.age, 10) < 0) return showModal("Age must be a valid positive number.", "error");
+        if (!formData.age || parseInt(formData.age, 10) < 0) return showModal("Invalid age.", "error");
 
         setLoading(true);
         try {

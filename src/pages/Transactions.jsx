@@ -65,7 +65,7 @@ export default function Transactions() {
                             <table className="w-full text-left border-collapse min-w-[600px]">
                                 <thead>
                                 <tr className="border-b border-slate-100">
-                                    <th className="p-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Cardano Tx Hash</th>
+                                    <th className="p-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Transaction Hash</th>
                                     <th className="p-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Date</th>
                                     <th className="p-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Purpose</th>
                                     <th className="p-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Status</th>

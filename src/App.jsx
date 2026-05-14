@@ -11,9 +11,7 @@ import RequestForm from './pages/RequestForm';
 import Transactions from './pages/Transactions';
 import AdminLogs from './pages/AdminLogs';
 
-const tuyomPassword = import.meta.env.VITE_TUYOMPASSWORD
-
-
+const tuyomPassword = import.meta.env.VITE_TUYOMPASSWORD;
 
 export default function App() {
     const location = useLocation();

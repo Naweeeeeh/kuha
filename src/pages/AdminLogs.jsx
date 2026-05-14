@@ -163,14 +163,14 @@ export default function AdminLogs() {
             if (dbError) throw new Error(`Database Sync Failed: ${dbError.message}`);
 
             if (!updatedData || updatedData.length === 0) {
-                throw new Error("Blockchain Success, but Database Blocked the Save! Please disable Row Level Security (RLS) in Supabase.");
+                throw new Error("Blockchain Success, Database Blocked.");
             }
 
             setLogs(currentLogs => currentLogs.map(l =>
                 l.id === log.id ? { ...l, tx_hash: txHash, status: 'On-Chain' } : l
             ));
 
-            localStorage.setItem('cardano_connected_time', Date.now().toString()); // giakpoy ko
+            localStorage.setItem('cardano_connected_time', Date.now().toString());
             setSuccessModal({ show: true, hash: txHash });
 
         } catch (err) {
@@ -178,7 +178,7 @@ export default function AdminLogs() {
             const errorStr = err.message || JSON.stringify(err);
 
             if (errorStr.includes("BAD_REQUEST") || errorStr.includes("Bad Request") || errorStr.includes("UTxO")) {
-                setErrorModal({ show: true, message: "Network Busy: Cardano is currently minting your previous transaction. Please wait 20 seconds for the next block before submitting another document!" });
+                setErrorModal({ show: true, message: "Network Busy, Please wait for another 20 seconds" });
             } else {
                 setErrorModal({ show: true, message: errorStr });
             }

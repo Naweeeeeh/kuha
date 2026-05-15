@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
 
 // Import images from your assets folder
 import image1 from "../assets/tower.png";
 import image2 from "../assets/navarra.png";
-import image3 from "../assets/daanglungsod.png";
+import image3 from "../assets/daanglungsod.png"; 
 import image4 from "../assets/ruins.png";
 import image5 from "../assets/fishing.png";
 import image6 from "../assets/urchin.png";
@@ -23,21 +24,21 @@ export default function HeritagePage() {
       image: image2,
       category: "Literary Heritage",
       heading: "The Legacy of Marcel Navarra",
-      subtext: "Walk the very shores that breathed life into modern Cebuano fiction. Known reverently as the \"Father of Modern Cebuano Literature,\" Marcel Navarra transformed the quiet, sun-drenched landscapes of Tuyom into the backdrop for some of the most influential stories in the Philippine canon. His pioneering use of realism allowed the everyday struggles, triumphs, and humors of the local fisherfolk and farmers to take center stage, forever dignifying the Visayan identity on the printed page. To visit Tuyom is to walk through a living library, where the salt air and the rustle of the palms still echo the rhythmic prose of Navarra’s most cherished works.\n\nFor the literary traveler and the culturally curious, Tuyom offers a rare chance to see the world through a master storyteller’s eyes. As you explore the barangay's coastal stretches and heritage sites, you aren't just seeing a beach; you are experiencing the \"Tuyom\" of Navarra’s imagination—a place where tradition meets the complexities of the modern world. We invite you to sit by the water, open a collection of his stories, and feel the deep, intellectual pulse of a community that served as the muse for a literary revolution. Discover the soul of Cebuano letters in the place where it all began."
+      subtext: "Walk the very shores that breathed life into modern Cebuano fiction. Known reverently as the \"Father of Modern Cebuano Literature,\" Marcel Navarra transformed the quiet, sun-drenched landscapes of Tuyom into the backdrop for some of the most influential stories in the Philippine canon. His pioneering use of realism allowed the everyday struggles, triumphs, and humors of the local fisherfolk and farmers to take center stage, forever dignifying the Visayan identity on the printed page. To visit Tuyom is to walk through a living library, where the salt air and the rustle of the palms still echo the rhythmic prose of Navarra’s most cherished works.\n\nFor the literary traveler and the culturally curious, Tuyom offers a rare chance to see the world through a master storyteller’s eyes. As you explore the barangay's coastal stretches and heritage sites, you aren't just seeing a beach; you are experiencing the \"Tuyom\" of Navarra’s imagination, a place where tradition meets the complexities of the modern world. We invite you to sit by the water, open a collection of his stories, and feel the deep, intellectual pulse of a community that served as the muse for a literary revolution. Discover the soul of Cebuano letters in the place where it all began."
     },
     {
       id: 3,
       image: image3,
       category: "Heritage Site",
       heading: "Daanglungsod",
-      subtext: "Step onto the hallowed grounds of Daanglungsod, the original heart of Carcar. Long before the city center moved inland, this coastal stretch in Tuyom served as the primary settlement for the early Carcaranons. Known as the \"Old Town,\" Daanglungsod is a landscape where history is etched into the very soil. It was here that the first community took root, braving the elements and the tides to establish a bustling seaside village. Today, walking through this area feels like a journey through time, offering visitors a rare glimpse into the foundational years of one of Cebu’s most storied cities.\n\nAs you wander through the quiet lanes of Daanglungsod, you are walking the same paths as the ancestors who built Carcar’s enduring legacy. This area is a living testament to resilience, marking the site where the community once thrived before relocating to seek refuge from the pirate raids of the colonial era. For history enthusiasts and cultural explorers, Daanglungsod provides a profound sense of place—a quiet, reflective corner of Tuyom where the echoes of the past meet the gentle sea breeze. It is a must-visit destination for anyone seeking to understand the true origins and the seafaring soul of the region."
+      subtext: "Step onto the hallowed grounds of Daanglungsod, the original heart of Carcar. Long before the city center moved inland, this coastal stretch in Tuyom served as the primary settlement for the early Carcaranons. Known as the \"Old Town,\" Daanglungsod is a landscape where history is etched into the very soil. It was here that the first community took root, braving the elements and the tides to establish a bustling seaside village. Today, walking through this area feels like a journey through time, offering visitors a rare glimpse into the foundational years of one of Cebu’s most storied cities.\n\nAs you wander through the quiet lanes of Daanglungsod, you are walking the same paths as the ancestors who built Carcar’s enduring legacy. This area is a living testament to resilience, marking the site where the community once thrived before relocating to seek refuge from the pirate raids of the colonial era. For history enthusiasts and cultural explorers, Daanglungsod provides a profound sense of place. A quiet, reflective corner of Tuyom where the echoes of the past meet the gentle sea breeze. It is a must-visit destination for anyone seeking to understand the true origins and the seafaring soul of the region."
     },
     {
       id: 4,
       image: image4,
       category: "Religious Heritage",
       heading: "The Inayangan Visita Ruins",
-      subtext: "Nestled near the historic borders of Tuyom lies the Inayangan Visita Ruins, a site that whispers the stories of Carcar’s earliest spiritual awakening. These weathered foundations mark the location of one of the first visitas, or mission chapels, established by Augustinian friars in the late 16th century. Long before the grand stone cathedrals of the city center were even a blueprint, these humble walls served as the religious and social anchor for the coastal settlers of the \"Old Town.\" Today, the moss-covered stones stand as a sacred portal to the past, inviting visitors to reflect on the deep-rooted faith and endurance of a community that stood its ground against the tides of time and colonial transition.\n\nA visit to the Inayangan ruins is a journey into the \"hidden\" heritage of the region, offering a serene and contemplative atmosphere far from the usual tourist trails. As you stand among the remnants of this ancient sanctuary, you are touching the very bedrock of Cebuano history—a place where indigenous culture and Spanish influence first converged. For those who seek to discover the authentic, unvarnished soul of Tuyom, these ruins provide a powerful connection to the ancestors who gathered here for strength and solace. It is an essential stop for heritage seekers looking to uncover the foundational chapters of the Carcaranon narrative."
+      subtext: "Nestled near the historic borders of Tuyom lies the Inayangan Visita Ruins, a site that whispers the stories of Carcar’s earliest spiritual awakening. These weathered foundations mark the location of one of the first visitas, or mission chapels, established by Augustinian friars in the late 16th century. Long before the grand stone cathedrals of the city center were even a blueprint, these humble walls served as the religious and social anchor for the coastal settlers of the \"Old Town.\" Today, the moss-covered stones stand as a sacred portal to the past, inviting visitors to reflect on the deep-rooted faith and endurance of a community that stood its ground against the tides of time and colonial transition.\n\nA visit to the Inayangan ruins is a journey into the \"hidden\" heritage of the region, offering a serene and contemplative atmosphere far from the usual tourist trails. As you stand among the remnants of this ancient sanctuary, you are touching the very bedrock of Cebuano history, a place where indigenous culture and Spanish influence first converged. For those who seek to discover the authentic, unvarnished soul of Tuyom, these ruins provide a powerful connection to the ancestors who gathered here for strength and solace. It is an essential stop for heritage seekers looking to uncover the foundational chapters of the Carcaranon narrative."
     },
     {
       id: 5,
@@ -51,7 +52,7 @@ export default function HeritagePage() {
       image: image6,
       category: "Culinary Heritage",
       heading: "The Sea-Inspired Flavors of Tuyom",
-      subtext: "Embark on a culinary journey that captures the very essence of the Bohol Strait with the Sea-Inspired Cuisine of Tuyom. Here, the \"catch of the day\" is more than a meal—it is a celebration of the barangay’s deep-rooted maritime heritage. Local kitchens have perfected the art of the kinilaw and tinowa, using traditional methods that highlight the absolute freshness of the sea’s bounty. But the true star of the local table is the Tuyom (sea urchin), the very namesake of the barangay. Served fresh from the reefs, these \"jewels of the sea\" offer a delicate, buttery richness that has sustained and delighted locals for centuries, making every bite a direct connection to the coastal waters that define this community.\n\nDining in Tuyom is an invitation to slow down and savor the authentic spirit of the \"Old Town.\" As you enjoy a feast by the shore, you are participating in a timeless ritual that links the modern traveler to the generations of fisherfolk who first settled these banks. The unique flavors found here—salty, tangy, and profoundly fresh—reflect a culture that respects the ocean's rhythm and rewards those who live by its tides. For the adventurous foodie and the cultural explorer alike, a taste of Tuyom’s sea-inspired offerings provides a sensory map of the region’s history, served with the warm hospitality and seaside charm that only this historic barangay can provide."
+      subtext: "Embark on a culinary journey that captures the very essence of the Bohol Strait with the Sea-Inspired Cuisine of Tuyom. Here, the \"catch of the day\" is more than a meal, it is a celebration of the barangay’s deep-rooted maritime heritage. Local kitchens have perfected the art of the kinilaw and tinowa, using traditional methods that highlight the absolute freshness of the sea’s bounty. But the true star of the local table is the Tuyom (sea urchin), the very namesake of the barangay. Served fresh from the reefs, these \"jewels of the sea\" offer a delicate, buttery richness that has sustained and delighted locals for centuries, making every bite a direct connection to the coastal waters that define this community.\n\nDining in Tuyom is an invitation to slow down and savor the authentic spirit of the \"Old Town.\" As you enjoy a feast by the shore, you are participating in a timeless ritual that links the modern traveler to the generations of fisherfolk who first settled these banks. The unique flavors found here are salty, tangy, and profoundly fresh, reflects a culture that respects the ocean's rhythm and rewards those who live by its tides. For the adventurous foodie and the cultural explorer alike, a taste of Tuyom’s sea-inspired offerings provides a sensory map of the region’s history, served with the warm hospitality and seaside charm that only this historic barangay can provide."
     }
   ];
 
@@ -69,54 +70,142 @@ export default function HeritagePage() {
     );
   };
 
+  // Framer Motion Variants for the Hero Section
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } 
+    },
+  };
+
   return (
-    <div className="flex flex-col w-full bg-stone-900">
-      <div className="relative w-full h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden">
+    <div className="w-full min-h-screen bg-gradient-to-t from-emerald-300 via-teal-200 to-white font-sans flex flex-col">
+      
+      {/* ================= HERO SECTION ================= */}
+      <section className="relative flex flex-col justify-center pt-20">
+        <div className="max-w-6xl mx-auto px-6 w-full">
+          <motion.div
+            initial="hidden"
+            animate="show"
+            variants={containerVariants}
+            className="max-w-3xl"
+          >
+            {/* Darkened the text colors slightly so they pop against the light green gradient */}
+            <motion.p variants={itemVariants} className="text-emerald-800 font-extrabold text-lg uppercase tracking-widest mb-4">
+              Our Legacy
+            </motion.p>
+
+            <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-8xl font-black text-stone-900 tracking-tight leading-[1.05] mb-8 drop-shadow-sm">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-800 via-teal-700 to-emerald-900">
+                Tuyom's
+              </span> <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E17100] via-[#FF9F43] to-[#E17100]">
+                Heritage
+              </span>
+            </motion.h1>
+
+            <motion.p variants={itemVariants} className="text-lg md:text-xl text-emerald-900 max-w-2xl leading-relaxed font-medium">
+              Discover the rich history, vibrant culture, and timeless traditions that shape the soul of our coastal community.
+            </motion.p>
+          </motion.div>
+        </div>
+      </section>
+
+      <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="h-1 bg-gradient-to-r from-transparent via-emerald-800 to-transparent my-25"
+        ></motion.div>
+
+      {/* ================= CAROUSEL SECTION ================= */}
+      <section className="w-full flex flex-col relative pb-8">
         
-        {/* Background Image */}
-        <img 
-          src={slideData[currentIndex].image} 
-          alt={slideData[currentIndex].heading}
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
-        />
-        
-        {/* Floating Text Box Overlay */}
-        <div className="absolute right-4 sm:right-12 md:right-20 lg:right-32 top-8 bottom-8 md:top-12 md:bottom-12 w-[90%] sm:w-[75%] md:w-[50%] lg:w-[40%] bg-gradient-to-br from-emerald-500/60 to-emerald-800/70 backdrop-blur-md flex flex-col justify-start overflow-y-auto shadow-2xl rounded-2xl md:rounded-3xl transition-all duration-500 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="w-full flex-1 flex items-center justify-center relative px-16 md:px-24">
           
-          {/* Inner Content Wrapper for consistent padding */}
-          <div className="p-8 md:p-10 flex flex-col w-full h-full">
-            <div className="w-10 h-1.5 bg-emerald-300 rounded-full mb-5 shrink-0 mt-auto pt-4 md:pt-0"></div>
-            <span className="inline-flex w-fit items-center gap-1.5 px-3 py-1 mb-4 text-[10px] font-black uppercase tracking-widest text-emerald-900 bg-emerald-100/90 rounded-md shrink-0">
-              <MapPin size={12} strokeWidth={2.5} />
-              {slideData[currentIndex].category}
-            </span>
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight mb-4 shrink-0 drop-shadow-sm">
-              {slideData[currentIndex].heading}
-            </h2>
-            <p className="text-sm sm:text-base text-emerald-50 font-medium leading-relaxed whitespace-pre-line break-words drop-shadow-sm pb-4 md:pb-0 mb-auto">
-              {slideData[currentIndex].subtext}
-            </p>
+          {/* Left Navigation Arrow */}
+          <button 
+            onClick={handlePrevious}
+            className="absolute z-20 left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-black/40 hover:bg-black/60 rounded-full flex items-center justify-center text-white/90 hover:text-white transition-all focus:outline-none hover:scale-105 active:scale-95"
+            aria-label="Previous"
+          >
+            <ArrowLeft size={32} strokeWidth={2.5} />
+          </button>
+
+          <div className="w-full max-w-7xl h-[65vh] flex flex-col md:flex-row gap-8 md:gap-12">
+            
+            {/* Left Side: Image Asset */}
+            <div className="w-full md:w-1/2 h-full rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-white">
+              <img 
+                key={currentIndex} 
+                src={slideData[currentIndex].image}
+                alt={slideData[currentIndex].heading}
+                className="w-full h-full object-cover transition-opacity duration-700"
+              />
+            </div>
+            
+            {/* Right Side: Text Content */}
+            <div className="w-full md:w-1/2 h-full bg-white border-4 border-white rounded-3xl p-8 md:p-12 flex flex-col shadow-xl overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-stone-300 [&::-webkit-scrollbar-thumb]:rounded-full">
+              
+              <span className="inline-flex w-fit items-center gap-1.5 px-3 py-1 mb-6 text-xs font-bold uppercase tracking-widest text-emerald-700 bg-emerald-50 rounded-md">
+                <MapPin size={14} strokeWidth={2.5} />
+                {slideData[currentIndex].category}
+              </span>
+              
+              <h2 className="text-3xl md:text-5xl font-black text-stone-900 tracking-tight mb-6 leading-tight">
+                {slideData[currentIndex].heading}
+              </h2>
+              
+              <p className="text-base md:text-lg text-stone-700 leading-relaxed whitespace-pre-line break-words text-justify">
+                {slideData[currentIndex].subtext}
+              </p>
+            </div>
+
           </div>
+
+          {/* Right Navigation Arrow */}
+          <button 
+            onClick={handleNext}
+            className="absolute z-20 right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-black/40 hover:bg-black/60 rounded-full flex items-center justify-center text-white/90 hover:text-white transition-all focus:outline-none hover:scale-105 active:scale-95"
+            aria-label="Next"
+          >
+            <ArrowRight size={32} strokeWidth={2.5} />
+          </button>
+
+        </div>
+
+        {/* Carousel Indicators */}
+        <div className="flex justify-center items-center h-16 mt-8 gap-3">
+          {slideData.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`h-3 rounded-full transition-all duration-500 shadow-sm ${
+                index === currentIndex 
+                  ? 'bg-stone-800 w-10' 
+                  : 'bg-white hover:bg-stone-400 w-3'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
         
-        {/* Navigation */}
-        <button 
-          onClick={handlePrevious}
-          className="absolute z-10 left-2 md:left-8 top-1/2 -translate-y-1/2 p-2 text-white/80 hover:text-white transition-colors focus:outline-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] hover:scale-110 active:scale-95 transition-transform"
-          aria-label="Previous"
-        >
-          <ArrowLeft size={48} strokeWidth={2.5} className="md:w-14 md:h-14" />
-        </button>
-        
-        <button 
-          onClick={handleNext}
-          className="absolute z-10 right-2 md:right-8 top-1/2 -translate-y-1/2 p-2 text-white/80 hover:text-white transition-colors focus:outline-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] hover:scale-110 active:scale-95 transition-transform"
-          aria-label="Next"
-        >
-          <ArrowRight size={48} strokeWidth={2.5} className="md:w-14 md:h-14" />
-        </button>
-        
-      </div>
+      </section>
+
     </div>
   );
 }

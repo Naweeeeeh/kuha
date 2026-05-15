@@ -75,11 +75,11 @@ export default function VisionMission() {
             alt="Vision & Mission"
             className="w-full h-full object-cover opacity-35"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A2318] via-[#0A2318]/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#E27515] via-[#0A2318]/80 to-transparent opacity-35"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-[#0A2318]/95 via-[#0A2318]/50 to-transparent"></div>
         </div>
 
-        <div className="max-w-6xl mx-auto px-6 w-full relative z-10 pt-8 pb-32">
+        <div className="max-w-6xl mx-auto px-6 w-full relative z-10 pt-8">
           <motion.div
             initial="hidden"
             animate="show"
@@ -103,9 +103,6 @@ export default function VisionMission() {
               Guided by our commitment to progress, we envision a barangay where every resident thrives in a safe, inclusive, and sustainable community.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4">
-              
-            </motion.div>
           </motion.div>
         </div>
       </section>

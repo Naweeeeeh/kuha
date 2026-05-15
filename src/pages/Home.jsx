@@ -91,15 +91,7 @@ export default function Home() {
             </motion.p>
 
             <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4">
-              <Link
-                to="/request"
-                className="group relative inline-flex items-center justify-center gap-3 bg-emerald-500 text-white px-8 py-4 rounded-full font-bold text-lg overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(16,185,129,0.4)] focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-[#0A2318]"
-              >
-                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
-                <FileText size={22} className="relative z-10" />
-                <span className="relative z-10">Request Document</span>
-                <ArrowRight size={22} className="relative z-10 transition-transform group-hover:translate-x-1" />
-              </Link>
+              
             </motion.div>
           </motion.div>
         </div>

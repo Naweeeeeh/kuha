@@ -5,7 +5,6 @@ import barangayLandscape from '../assets/barangaylandscape.png';
 import ourHeritageImg from "../assets/our-heritage-img.jpeg";
 import missionVisionImg from "../assets/mission-vision-img.jpg";
 import emergencyLinesImg from "../assets/emergency-lines-img.jpg";
-import { link } from 'framer-motion/client';
 
 export default function Home() {
   const cards = [
@@ -224,7 +223,7 @@ export default function Home() {
             viewport={{ once: true, margin: "-100px" }}
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
           >
-            {cards.map((c, i) => (
+            {cards.map((c) => (
               <a key={c.title} href={c.link} className="block no-underline">
                 <motion.div
                   variants={itemVariants}
@@ -252,12 +251,12 @@ export default function Home() {
                     {/* Decorative background shape */}
                     <div className="absolute top-0 right-0 w-32 h-32 bg-stone-50 rounded-bl-full -z-10 transition-transform duration-700 group-hover:scale-150 opacity-50"></div>
 
-                    <h4 className="font-extrabold text-stone-800 text-2xl mb-3 group-hover:text-emerald-600 transition-colors">
-                      {c.title}
-                    </h4>
-                    <p className="text-stone-500 text-base leading-relaxed flex-1">
-                      {c.desc}
-                    </p>
+                      <h4 className="font-extrabold text-stone-800 text-2xl mb-3 group-hover:text-emerald-600 transition-colors">
+                        {c.title}
+                      </h4>
+                      <p className="text-stone-500 text-base leading-relaxed flex-1">
+                        {c.desc}
+                      </p>
 
                     <div className="mt-8 flex items-center gap-2 text-sm font-bold text-stone-400 group-hover:text-emerald-600 transition-colors uppercase tracking-widest">
                       Learn more

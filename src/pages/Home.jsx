@@ -137,39 +137,7 @@ export default function Home() {
 
       {/* MAIN CONTENT AREA */}
       <div className="max-w-6xl mx-auto px-6">
-
-        {/* QUICK ACTION CARD (Moved near top for easy access) */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.7 }}
-          className="relative bg-stone-900 rounded-[3rem] p-10 md:p-16 overflow-hidden shadow-2xl mb-24"
-        >
-          {/* Decorative background elements */}
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(circle_at_top_right,_rgba(16,185,129,0.15),_transparent_60%)] -translate-y-1/2 translate-x-1/3"></div>
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle_at_bottom_left,_rgba(16,185,129,0.1),_transparent_50%)] translate-y-1/3 -translate-x-1/4"></div>
-
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-            <div className="text-center md:text-left max-w-2xl">
-              <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-5 leading-tight">
-                Need official documents?
-              </h2>
-              <p className="text-stone-400 text-lg md:text-xl leading-relaxed">
-                Request your barangay clearance, indigency, and residency online without the hassle. Fast, secure, and ready when you are.
-              </p>
-            </div>
-
-            <Link
-              to="/request"
-              className="group w-full md:w-auto flex items-center justify-center gap-3 bg-emerald-500 text-white py-5 px-10 rounded-full font-bold text-xl shadow-[0_8px_30px_0_rgba(16,185,129,0.3)] transition-all hover:scale-105 hover:bg-emerald-400 shrink-0"
-            >
-              <FileText size={26} className="group-hover:scale-110 transition-transform" />
-              <span>Start Request</span>
-              <ArrowRight size={26} className="ml-1 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </motion.div>
+        
 
         {/* EXPLORE SECTION */}
         <div className="mb-10">
@@ -260,6 +228,38 @@ export default function Home() {
             ))}
           </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="relative bg-stone-900 rounded-[3rem] p-10 md:p-16 overflow-hidden shadow-2xl mt-24"
+        >
+          {/* Decorative background elements */}
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(circle_at_top_right,_rgba(16,185,129,0.15),_transparent_60%)] -translate-y-1/2 translate-x-1/3"></div>
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle_at_bottom_left,_rgba(16,185,129,0.1),_transparent_50%)] translate-y-1/3 -translate-x-1/4"></div>
+
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
+            <div className="text-center md:text-left max-w-2xl">
+              <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-5 leading-tight">
+                Need official documents?
+              </h2>
+              <p className="text-stone-400 text-lg md:text-xl leading-relaxed">
+                Request your barangay clearance, indigency, and residency online without the hassle. Fast, secure, and ready when you are.
+              </p>
+            </div>
+
+            <Link
+              to="/request"
+              className="group w-full md:w-auto flex items-center justify-center gap-3 bg-emerald-500 text-white py-5 px-10 rounded-full font-bold text-xl shadow-[0_8px_30px_0_rgba(16,185,129,0.3)] transition-all hover:scale-105 hover:bg-emerald-400 shrink-0"
+            >
+              <FileText size={26} className="group-hover:scale-110 transition-transform" />
+              <span>Start Request</span>
+              <ArrowRight size={26} className="ml-1 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </motion.div>
 
       </div>
     </div>

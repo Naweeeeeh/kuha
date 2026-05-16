@@ -9,7 +9,7 @@ export default function EmergencyLines() {
       id: 1,
       department: "Barangay Tuyom Hall",
       description: "For local barangay emergencies, tanod assistance, and general inquiries.",
-      numbers: ["(032) 123-4567", "0912-345-6789"],
+      numbers: ["(049) 357 5689", "0929 444 7161"],
       icon: Building2,
       colorClass: "text-emerald-600 bg-emerald-50",
       borderClass: "border-emerald-100",
@@ -18,7 +18,7 @@ export default function EmergencyLines() {
       id: 2,
       department: "Carcar City Police Station",
       description: "For crime reporting, accidents, and urgent security concerns.",
-      numbers: ["117", "(032) 487-9111"],
+      numbers: ["(032) 487 8886", "(032) 266 9191"],
       icon: ShieldAlert,
       colorClass: "text-blue-600 bg-blue-50",
       borderClass: "border-blue-100",
@@ -27,7 +27,7 @@ export default function EmergencyLines() {
       id: 3,
       department: "Carcar Fire Station",
       description: "For fire emergencies, rescue operations, and hazardous material incidents.",
-      numbers: ["(032) 487-9911", "0998-765-4321"],
+      numbers: ["0995 367 7872"],
       icon: Flame,
       colorClass: "text-red-600 bg-red-50",
       borderClass: "border-red-100",
@@ -36,7 +36,7 @@ export default function EmergencyLines() {
       id: 4,
       department: "Carcar Provincial Hospital",
       description: "For medical emergencies, ambulance requests, and urgent care.",
-      numbers: ["(032) 487-8888"],
+      numbers: ["(032) 487-8120", "(032) 487-8125"],
       icon: Stethoscope,
       colorClass: "text-teal-600 bg-teal-50",
       borderClass: "border-teal-100",
@@ -45,7 +45,7 @@ export default function EmergencyLines() {
       id: 5,
       department: "CDRRMO Carcar",
       description: "City Disaster Risk Reduction and Management Office for natural disasters.",
-      numbers: ["(032) 487-1234"],
+      numbers: ["(032) 345 6423", "0929 444 7161"],
       icon: AlertTriangle,
       colorClass: "text-orange-600 bg-orange-50",
       borderClass: "border-orange-100",
@@ -122,7 +122,7 @@ export default function EmergencyLines() {
               </div>
               
               {/* Description */}
-              <p className="text-stone-500 text-sm mb-6 flex-1">
+              <p className="text-stone-600 text-sm mb-6 flex-1">
                 {contact.description}
               </p>
 

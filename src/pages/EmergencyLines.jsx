@@ -109,7 +109,7 @@ export default function EmergencyLines() {
             <motion.div 
               key={contact.id}
               variants={cardVariants}
-              className={`bg-white rounded-2xl p-8 border ${contact.borderClass} shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col`}
+              className={`bg-white rounded-2xl p-8 border-5 ${contact.borderClass} shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col`}
             >
               {/* Card Header with Icon */}
               <div className="flex items-center gap-4 mb-6">

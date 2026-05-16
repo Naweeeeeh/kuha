@@ -165,15 +165,6 @@ export default function Home() {
                 Explore Barangay Tuyom
               </motion.h3>
             </div>
-            <motion.button
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="text-emerald-600 font-bold hover:text-emerald-700 flex items-center gap-2 group transition-colors text-lg"
-            >
-              View all programs
-              <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
-            </motion.button>
           </div>
 
           <motion.div

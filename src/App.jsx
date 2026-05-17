@@ -10,6 +10,11 @@ import Home from './pages/Home';
 import RequestForm from './pages/RequestForm';
 import Transactions from './pages/Transactions';
 import AdminLogs from './pages/AdminLogs';
+import HeritagePage from './pages/HeritagePage';
+
+import Heritage from './pages/Heritage';
+import VisionMission from './pages/VisionMission';
+import EmergencyLines from './pages/EmergencyLines';
 
 const tuyomPassword = import.meta.env.VITE_TUYOMPASSWORD;
 
@@ -54,9 +59,15 @@ export default function App() {
                     <Route path="/" element={<PageTransition><Home /></PageTransition>} />
                     <Route path="/request" element={<PageTransition><RequestForm /></PageTransition>} />
                     <Route path="/transactions" element={<PageTransition><Transactions /></PageTransition>} />
+                    <Route path="/heritage" element={<PageTransition><HeritagePage /></PageTransition>} />
                     <Route path="/admin" element={
                         isAdmin ? <PageTransition><AdminLogs /></PageTransition> : <Navigate to="/" replace />
                     } />
+
+                    
+                    <Route path="/Heritage" element={<PageTransition><Heritage /></PageTransition>} />
+                    <Route path="/VisionMission" element={<PageTransition><VisionMission /></PageTransition>} />
+                    <Route path="/EmergencyLines" element={<PageTransition><EmergencyLines /></PageTransition>} />
 
                 </Routes>
             </AnimatePresence>

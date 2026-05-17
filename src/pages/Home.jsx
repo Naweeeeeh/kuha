@@ -167,57 +167,53 @@ export default function Home() {
             </div>
           </div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          >
-            {cards.map((c) => (
-              <a key={c.title} href={c.link} className="block no-underline">
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-100px" }}
+                className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            >
+                {cards.map((c) => (
+                    <Link key={c.title} to={c.link} className="block no-underline">
                 <motion.div
-                  variants={itemVariants}
-                  whileHover={{ y: -8 }}
-                  className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] border border-stone-100 overflow-hidden flex flex-col group cursor-pointer transition-shadow duration-300"
+                    variants={itemVariants}
+                    whileHover={{ y: -8 }}
+                    className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] border border-stone-100 overflow-hidden flex flex-col group cursor-pointer transition-shadow duration-300"
                 >
-                  {/* Image Header */}
-                  <div className="h-64 w-full relative overflow-hidden bg-stone-200">
-                    <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
-                    <img
-                      src={c.imgUrl}
-                      alt={c.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    {/* Floating Icon Badge */}
-                    <div className="absolute top-5 right-5 p-3.5 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl z-20 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
-                      <div className={`${c.iconColor}`}>
-                        <c.icon size={26} strokeWidth={2.5} />
-                      </div>
+                    <div className="h-64 w-full relative overflow-hidden bg-stone-200">
+                        <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
+                        <img
+                            src={c.imgUrl}
+                            alt={c.title}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute top-5 right-5 p-3.5 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl z-20 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
+                            <div className={`${c.iconColor}`}>
+                                <c.icon size={26} strokeWidth={2.5} />
+                            </div>
+                        </div>
                     </div>
-                  </div>
 
-                  {/* Content Area */}
-                  <div className="p-8 flex flex-col flex-1 relative bg-white">
-                    {/* Decorative background shape */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-stone-50 rounded-bl-full -z-10 transition-transform duration-700 group-hover:scale-150 opacity-50"></div>
+                    <div className="p-8 flex flex-col flex-1 relative bg-white">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-stone-50 rounded-bl-full -z-10 transition-transform duration-700 group-hover:scale-150 opacity-50"></div>
 
-                      <h4 className="font-extrabold text-stone-800 text-2xl mb-3 group-hover:text-emerald-600 transition-colors">
-                        {c.title}
-                      </h4>
-                      <p className="text-stone-500 text-base leading-relaxed flex-1">
-                        {c.desc}
-                      </p>
+                        <h4 className="font-extrabold text-stone-800 text-2xl mb-3 group-hover:text-emerald-600 transition-colors">
+                            {c.title}
+                        </h4>
+                        <p className="text-stone-500 text-base leading-relaxed flex-1">
+                            {c.desc}
+                        </p>
 
-                    <div className="mt-8 flex items-center gap-2 text-sm font-bold text-stone-400 group-hover:text-emerald-600 transition-colors uppercase tracking-widest">
-                      Learn more
-                      <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                        <div className="mt-8 flex items-center gap-2 text-sm font-bold text-stone-400 group-hover:text-emerald-600 transition-colors uppercase tracking-widest">
+                            Learn more
+                            <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                        </div>
                     </div>
-                  </div>
                 </motion.div>
-              </a>
+            </Link>
             ))}
-          </motion.div>
+        </motion.div>
         </div>
 
         <motion.div

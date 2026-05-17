@@ -15,7 +15,7 @@ export default function Home() {
       imgUrl: ourHeritageImg,
       iconColor: "text-emerald-600",
       iconBg: "bg-emerald-100/80",
-      link: "/Heritage"
+      link: "/heritage"
     },
     {
       icon: Target,
@@ -24,7 +24,7 @@ export default function Home() {
       imgUrl: missionVisionImg,
       iconColor: "text-amber-600",
       iconBg: "bg-amber-100/80",
-      link: "/VisionMission"
+      link: "/vision-mission"
     },
     {
       icon: PhoneCall,
@@ -33,7 +33,7 @@ export default function Home() {
       imgUrl: emergencyLinesImg,
       iconColor: "text-rose-600",
       iconBg: "bg-rose-100/80",
-      link: "/EmergencyLines"
+      link: "/emergency-lines"
     },
   ];
 

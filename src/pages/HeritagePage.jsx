@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 
-// Import images from your assets folder
 import image1 from "../assets/tower.png";
 import image2 from "../assets/navarra.png";
 import image3 from "../assets/daanglungsod.png"; 
@@ -70,7 +69,6 @@ export default function HeritagePage() {
     );
   };
 
-  // Framer Motion Variants for the Hero Section
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
@@ -93,8 +91,7 @@ export default function HeritagePage() {
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-t from-emerald-300 via-teal-200 to-white font-sans flex flex-col">
-      
-      {/* ================= HERO SECTION ================= */}
+
       <section className="relative flex flex-col justify-center pt-20">
         <div className="max-w-6xl mx-auto px-6 w-full">
           <motion.div
@@ -103,7 +100,6 @@ export default function HeritagePage() {
             variants={containerVariants}
             className="max-w-3xl"
           >
-            {/* Darkened the text colors slightly so they pop against the light green gradient */}
             <motion.p variants={itemVariants} className="text-emerald-800 font-extrabold text-lg uppercase tracking-widest mb-4">
               Our Legacy
             </motion.p>
@@ -132,12 +128,10 @@ export default function HeritagePage() {
           className="h-1 bg-gradient-to-r from-transparent via-emerald-800 to-transparent my-25"
         ></motion.div>
 
-      {/* ================= CAROUSEL SECTION ================= */}
       <section className="w-full flex flex-col relative pb-8">
         
         <div className="w-full flex-1 flex items-center justify-center relative px-16 md:px-24">
-          
-          {/* Left Navigation Arrow */}
+
           <button 
             onClick={handlePrevious}
             className="absolute z-20 left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-black/40 hover:bg-black/60 rounded-full flex items-center justify-center text-white/90 hover:text-white transition-all focus:outline-none hover:scale-105 active:scale-95"
@@ -147,8 +141,7 @@ export default function HeritagePage() {
           </button>
 
           <div className="w-full max-w-7xl h-[65vh] flex flex-col md:flex-row gap-8 md:gap-12">
-            
-            {/* Left Side: Image Asset */}
+
             <div className="w-full md:w-1/2 h-full rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-white">
               <img 
                 key={currentIndex} 
@@ -157,8 +150,7 @@ export default function HeritagePage() {
                 className="w-full h-full object-cover transition-opacity duration-700"
               />
             </div>
-            
-            {/* Right Side: Text Content */}
+
             <div className="w-full md:w-1/2 h-full bg-white border-4 border-white rounded-3xl p-8 md:p-12 flex flex-col shadow-xl overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-stone-300 [&::-webkit-scrollbar-thumb]:rounded-full">
               
               <span className="inline-flex w-fit items-center gap-1.5 px-3 py-1 mb-6 text-xs font-bold uppercase tracking-widest text-emerald-700 bg-emerald-50 rounded-md">

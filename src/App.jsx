@@ -65,9 +65,9 @@ export default function App() {
                     } />
 
                     
-                    <Route path="/Heritage" element={<PageTransition><Heritage /></PageTransition>} />
-                    <Route path="/VisionMission" element={<PageTransition><VisionMission /></PageTransition>} />
-                    <Route path="/EmergencyLines" element={<PageTransition><EmergencyLines /></PageTransition>} />
+                    <Route path="/heritage" element={<PageTransition><Heritage /></PageTransition>} />
+                    <Route path="/vision-mission" element={<PageTransition><VisionMission /></PageTransition>} />
+                    <Route path="/emergency-lines" element={<PageTransition><EmergencyLines /></PageTransition>} />
 
                 </Routes>
             </AnimatePresence>

@@ -25,12 +25,11 @@ export const KuhaLogo = ({ className = "w-9 h-9" }) => (
 export default function Navbar({ isAdmin, onLogout }) {
     const [open, setOpen] = useState(false);
 
-    // Dynamically build links based on Admin Status
     const links = [
         { label: "Home", href: "/" },
-        { label: "Heritage", href: "/Heritage" },
-        { label: "Vision & Mission", href: "/VisionMission" },
-        { label: "Emergency Lines", href: "/EmergencyLines" },
+        { label: "Heritage", href: "/heritage" },
+        { label: "Vision & Mission", href: "/vision-mission" },
+        { label: "Emergency Lines", href: "/emergency-lines" },
         { label: "Public Ledger", href: "/transactions" },
         ...(isAdmin ? [{ label: "Secretary Logs", href: "/admin" }] : []),
         { label: "Request Document", href: "/request", isCta: true },

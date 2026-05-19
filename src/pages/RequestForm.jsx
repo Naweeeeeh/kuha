@@ -74,7 +74,13 @@ export default function RequestForm() {
 
         setLoading(true);
         try {
-            const { error } = await supabase.auth.signInWithOtp({ email: email, options: { shouldCreateUser: true } });
+            const { error } = await supabase.auth.signInWithOtp({
+                email: email,
+                options: {
+                    shouldCreateUser: true,
+                    emailRedirectTo: `${window.location.origin}/request`
+                }
+            });
             if (error) throw error;
             setStep(2);
             setResendTimer(60);

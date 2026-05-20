@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, Download, Clock, MapPin, Printer, X, Eye, Wallet, Link as LinkIcon, CheckCircle2, LogOut, XCircle } from 'lucide-react';
+import { FileText, Download, Clock, MapPin, Printer, X, Eye, Wallet, Link as LinkIcon, CheckCircle2, LogOut, XCircle, Database } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { PDFViewer } from '@react-pdf/renderer';
 import { CertificatePDF } from '../components/pdf/CertificatePDF';
@@ -28,6 +28,9 @@ export default function AdminLogs() {
 
     const [wallet, setWallet] = useState(null);
     const [isTransacting, setIsTransacting] = useState(false);
+
+    const [isBatching, setIsBatching] = useState(false);
+    const [needsDailyPush, setNeedsDailyPush] = useState(false);
 
     useEffect(() => {
         fetchLogs();
@@ -67,6 +70,30 @@ export default function AdminLogs() {
 
         return () => supabase.removeChannel(channel);
     }, [walletAddress]);
+
+    useEffect(() => {
+        const checkSchedule = () => {
+            const pendingCount = logs.filter(l => !l.tx_hash).length;
+
+            const now = new Date();
+            const formatter = new Intl.DateTimeFormat('en-US', {
+                timeZone: 'Asia/Manila',
+                hour: 'numeric',
+                hour12: false
+            });
+            const cebuHour = parseInt(formatter.format(now), 10);
+
+            if (cebuHour >= 8 && pendingCount > 0) {
+                setNeedsDailyPush(true);
+            } else {
+                setNeedsDailyPush(false);
+            }
+        };
+
+        checkSchedule();
+        const interval = setInterval(checkSchedule, 60000); // Check every minute
+        return () => clearInterval(interval);
+    }, [logs]);
 
     const fetchLogs = async () => {
         try {
@@ -185,6 +212,59 @@ export default function AdminLogs() {
             }
         } finally {
             setIsTransacting(false);
+        }
+    };
+
+    const pushAllPending = async () => {
+        const pendingLogs = logs.filter(log => !log.tx_hash);
+        if (pendingLogs.length === 0) return;
+
+        if (!walletAddress || !wallet) {
+            setErrorModal({ show: true, message: "Please connect a Cardano wallet first." });
+            return;
+        }
+
+        setIsBatching(true);
+        setErrorModal({ show: false, message: '' });
+
+        try {
+            const tx = new Transaction({ initiator: wallet })
+                .sendLovelace(walletAddress, "1500000");
+
+            const batchMetadata = {};
+            pendingLogs.forEach((log, index) => {
+                batchMetadata[index.toString()] = [
+                    `ID: ${log.id}`.substring(0, 64),
+                    `Doc: ${log.document_type || 'Indigency'}`.substring(0, 64),
+                    `Req: ${log.full_name}`.substring(0, 64)
+                ];
+            });
+
+            tx.setMetadata(674, batchMetadata);
+
+            const unsignedTx = await tx.build();
+            const signedTx = await wallet.signTx(unsignedTx);
+            const txHash = await wallet.submitTx(signedTx);
+
+            for (const log of pendingLogs) {
+                await supabase
+                    .from('requests')
+                    .update({ tx_hash: txHash, status: 'On-Chain' })
+                    .eq('id', log.id);
+            }
+
+            setLogs(currentLogs => currentLogs.map(l =>
+                !l.tx_hash ? { ...l, tx_hash: txHash, status: 'On-Chain' } : l
+            ));
+
+            localStorage.setItem('cardano_connected_time', Date.now().toString());
+            setSuccessModal({ show: true, hash: txHash });
+
+        } catch (err) {
+            console.error("Batch Error:", err);
+            setErrorModal({ show: true, message: err.message || "Failed to batch transactions." });
+        } finally {
+            setIsBatching(false);
         }
     };
 
@@ -318,10 +398,9 @@ export default function AdminLogs() {
 
             <div className="container max-w-7xl mx-auto w-full relative">
 
-                {/* Decorative element */}
                 <div className="absolute top-0 right-1/4 w-64 h-64 bg-emerald-200 blur-[120px] rounded-full -z-10 opacity-40"></div>
 
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
@@ -364,14 +443,32 @@ export default function AdminLogs() {
                                 <span className="text-2xl font-black text-emerald-600 leading-none mt-0.5">{logs.length}</span>
                             </div>
                             <div className="h-10 w-px bg-stone-100"></div>
-                            <button onClick={fetchLogs} className="text-sm font-bold text-stone-500 hover:text-emerald-600 transition-colors flex items-center gap-1.5">
-                                <Clock size={14} /> Refresh
-                            </button>
+
+                            <div className="flex items-center gap-3">
+                                <button onClick={fetchLogs} className="p-2 text-stone-400 hover:text-emerald-600 transition-colors" title="Refresh">
+                                    <Clock size={18} />
+                                </button>
+
+                                {logs.filter(l => !l.tx_hash).length > 0 && (
+                                    <button
+                                        onClick={pushAllPending}
+                                        disabled={isBatching || !walletAddress}
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-xs transition-all ${
+                                            needsDailyPush
+                                                ? 'bg-red-500 text-white animate-pulse hover:bg-red-600 shadow-lg shadow-red-500/30'
+                                                : 'bg-stone-800 text-white hover:bg-black'
+                                        } disabled:opacity-50 disabled:animate-none`}
+                                    >
+                                        <Database size={14} />
+                                        {isBatching ? 'Batching...' : `Push All Pending (${logs.filter(l => !l.tx_hash).length})`}
+                                    </button>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.2 }}
@@ -407,11 +504,11 @@ export default function AdminLogs() {
                                 </tr>
                             ) : (
                                 logs.map((log, index) => (
-                                    <motion.tr 
+                                    <motion.tr
                                         initial={{ opacity: 0, x: -10 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ duration: 0.3, delay: index * 0.05 }}
-                                        key={log.id} 
+                                        key={log.id}
                                         className="hover:bg-emerald-50/30 transition-colors group"
                                     >
                                         <td className="px-8 py-5 whitespace-nowrap">

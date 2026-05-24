@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import { motion } from "framer-motion";
-import barangayLandscape from '../assets/barangaylandscape.png';
+import barangayLandscape from "../assets/barangaylandscape.png";
 import ourHeritageImg from "../assets/our-heritage-img.jpeg";
 import missionVisionImg from "../assets/mission-vision-img.jpg";
 import emergencyLinesImg from "../assets/emergency-lines-img.jpg";
@@ -14,7 +14,7 @@ export default function Home() {
       imgUrl: ourHeritageImg,
       iconColor: "text-emerald-600",
       iconBg: "bg-emerald-100/80",
-      link: "/heritage"
+      link: "/heritage",
     },
     {
       title: "Vision & Mission",
@@ -22,7 +22,7 @@ export default function Home() {
       imgUrl: missionVisionImg,
       iconColor: "text-amber-600",
       iconBg: "bg-amber-100/80",
-      link: "/vision-mission"
+      link: "/vision-mission",
     },
     {
       title: "Emergency Lines",
@@ -30,7 +30,7 @@ export default function Home() {
       imgUrl: emergencyLinesImg,
       iconColor: "text-rose-600",
       iconBg: "bg-rose-100/80",
-      link: "/emergency-lines"
+      link: "/emergency-lines",
     },
   ];
 
@@ -44,18 +44,21 @@ export default function Home() {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.2 }
-    }
+      transition: { staggerChildren: 0.2 },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 300, damping: 24 },
+    },
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-stone-50 to-emerald-100/50 font-sans pb-24 selection:bg-emerald-200 selection:text-emerald-900">
-
       {/* HERO SECTION */}
       <section className="relative min-h-[85vh] flex flex-col justify-center overflow-hidden bg-[#0A2318]">
         {/* Background Image with Overlay */}
@@ -76,20 +79,28 @@ export default function Home() {
             variants={containerVariants}
             className="max-w-3xl"
           >
-            <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight leading-[1.05] mb-6">
+            <motion.h1
+              variants={itemVariants}
+              className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight leading-[1.05] mb-6"
+            >
               Maayong Adlaw, <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-emerald-100">
                 Barangay Tuyom
               </span>
             </motion.h1>
 
-            <motion.p variants={itemVariants} className="text-lg md:text-xl text-emerald-50 max-w-xl leading-relaxed mb-10 font-medium">
-              Serbisyo para sa tanan. Experience a progressive, inclusive, and sustainable community where every resident matters.
+            <motion.p
+              variants={itemVariants}
+              className="text-lg md:text-xl text-emerald-50 max-w-xl leading-relaxed mb-10 font-medium"
+            >
+              Serbisyo para sa tanan. Experience a progressive, inclusive, and
+              sustainable community where every resident matters.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4">
-              
-            </motion.div>
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap items-center gap-4"
+            ></motion.div>
           </motion.div>
         </div>
 
@@ -119,11 +130,17 @@ export default function Home() {
           className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
           {stats.map((stat, idx) => (
-            <div key={idx} className="bg-[#0C2418] hover:bg-[#14613b] backdrop-blur-xl rounded-[2rem] p-6 border-5 border-white/95 md:p-8 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] flex items-center gap-6 transition-all duration-300 hover:-translate-y-1">
-
+            <div
+              key={idx}
+              className="bg-[#0C2418] hover:bg-[#14613b] backdrop-blur-xl rounded-[2rem] p-6 border-5 border-white/95 md:p-8 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] flex items-center gap-6 transition-all duration-300 hover:-translate-y-1"
+            >
               <div>
-                <div className="text-3xl md:text-4xl font-extrabold text-white/90 tracking-tight">{stat.value}</div>
-                <div className="text-sm font-semibold text-white/80 uppercase tracking-wider mt-1">{stat.label}</div>
+                <div className="text-3xl md:text-4xl font-extrabold text-white/90 tracking-tight">
+                  {stat.value}
+                </div>
+                <div className="text-sm font-semibold text-white/80 uppercase tracking-wider mt-1">
+                  {stat.label}
+                </div>
               </div>
             </div>
           ))}
@@ -132,25 +149,19 @@ export default function Home() {
 
       {/* MAIN CONTENT AREA */}
       <div className="max-w-6xl mx-auto px-6">
-        
-
         {/* EXPLORE SECTION */}
         <div className="mb-10">
           <h2 className="text-[56px] text-center mx-auto font-bold text-emerald-800 uppercase tracking-widest padding-bottom-4 mb-12 relative">
-                  Discover
+            Discover
           </h2>
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-            
             <div className="max-w-2xl">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 className="flex items-center w-full justify-center gap-3 mb-4"
-              >
-                
-                
-              </motion.div>
+              ></motion.div>
               <motion.h3
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -162,50 +173,50 @@ export default function Home() {
             </div>
           </div>
 
-            <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, margin: "-100px" }}
-                className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            >
-                {cards.map((c) => (
-                    <Link key={c.title} to={c.link} className="block no-underline">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
+            {cards.map((c) => (
+              <Link key={c.title} to={c.link} className="block no-underline">
                 <motion.div
-                    variants={itemVariants}
-                    whileHover={{ y: -8 }}
-                    className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] border border-stone-100 overflow-hidden flex flex-col group cursor-pointer transition-shadow duration-300"
+                  variants={itemVariants}
+                  whileHover={{ y: -8 }}
+                  className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] border border-stone-100 overflow-hidden flex flex-col group cursor-pointer transition-shadow duration-300"
                 >
-                    <div className="h-64 w-full relative overflow-hidden bg-stone-200">
-                        <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
-                        <img
-                            src={c.imgUrl}
-                            alt={c.title}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
-                        <div className="absolute top-5 right-5 p-3.5 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl z-20 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
+                  <div className="h-64 w-full relative overflow-hidden bg-stone-200">
+                    <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
+                    <img
+                      src={c.imgUrl}
+                      alt={c.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute top-5 right-5 p-3.5 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl z-20 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3"></div>
+                  </div>
 
-                        </div>
+                  <div className="p-8 flex flex-col flex-1 relative bg-white">
+                    {/* Removed decorative rounded element */}
+                    <h4 className="font-extrabold text-stone-800 text-2xl mb-3 group-hover:text-emerald-600 transition-colors">
+                      {c.title}
+                    </h4>
+                    <p className="text-stone-500 text-base leading-relaxed flex-1">
+                      {c.desc}
+                    </p>
+
+                    <div className="mt-8 flex items-center gap-2 text-sm font-bold text-stone-400 group-hover:text-emerald-600 transition-colors uppercase tracking-widest">
+                      Learn more
+                      <span className="transition-transform group-hover:translate-x-1 font-bold text-xl ml-2">
+                        &rarr;
+                      </span>
                     </div>
-
-                    <div className="p-8 flex flex-col flex-1 relative bg-white">
-                        {/* Removed decorative rounded element */}
-                        <h4 className="font-extrabold text-stone-800 text-2xl mb-3 group-hover:text-emerald-600 transition-colors">
-                            {c.title}
-                        </h4>
-                        <p className="text-stone-500 text-base leading-relaxed flex-1">
-                            {c.desc}
-                        </p>
-
-                        <div className="mt-8 flex items-center gap-2 text-sm font-bold text-stone-400 group-hover:text-emerald-600 transition-colors uppercase tracking-widest">
-                            Learn more
-                            <span className="transition-transform group-hover:translate-x-1 font-bold text-xl ml-2">&rarr;</span>
-                        </div>
-                    </div>
+                  </div>
                 </motion.div>
-            </Link>
+              </Link>
             ))}
-        </motion.div>
+          </motion.div>
         </div>
 
         <motion.div
@@ -222,7 +233,8 @@ export default function Home() {
                 Need official documents?
               </h2>
               <p className="text-stone-400 text-lg md:text-xl leading-relaxed">
-                Request your barangay clearance, indigency, and residency online without the hassle. Fast, secure, and ready when you are.
+                Request your barangay clearance, indigency, and residency online
+                without the hassle. Fast, secure, and ready when you are.
               </p>
             </div>
 
@@ -231,11 +243,12 @@ export default function Home() {
               className="group w-full md:w-auto flex items-center justify-center gap-3 bg-emerald-500 text-white py-5 px-10 rounded-full font-bold text-xl shadow-[0_8px_30px_0_rgba(16,185,129,0.3)] transition-all hover:scale-105 hover:bg-emerald-400 shrink-0"
             >
               <span>Start Request</span>
-              <span className="font-bold text-xl ml-2 group-hover:translate-x-1 transition-transform">&rarr;</span>
+              <span className="font-bold text-xl ml-2 group-hover:translate-x-1 transition-transform">
+                &rarr;
+              </span>
             </Link>
           </div>
         </motion.div>
-
       </div>
     </div>
   );

@@ -1,14 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import { motion } from 'framer-motion';
-import carcarImg from '../assets/carcar.jpg';
+import { motion } from "framer-motion";
+import carcarImg from "../assets/carcar.jpg";
 
 export default function EmergencyLines() {
   const emergencyContacts = [
     {
       id: 1,
       department: "Tuyom Barangay Hall",
-      description: "For local barangay emergencies, tanod assistance, and general inquiries.",
+      description:
+        "For local barangay emergencies, tanod assistance, and general inquiries.",
       numbers: ["(049) 357 5689", "0929 444 7161"],
       colorClass: "text-emerald-600 bg-emerald-50",
       borderClass: "border-emerald-100",
@@ -16,7 +17,8 @@ export default function EmergencyLines() {
     {
       id: 2,
       department: "Carcar City Police Station",
-      description: "For crime reporting, accidents, and urgent security concerns.",
+      description:
+        "For crime reporting, accidents, and urgent security concerns.",
       numbers: ["(032) 487 8886", "(032) 266 9191"],
       colorClass: "text-blue-600 bg-blue-50",
       borderClass: "border-blue-100",
@@ -24,7 +26,8 @@ export default function EmergencyLines() {
     {
       id: 3,
       department: "Carcar Fire Station",
-      description: "For fire emergencies, rescue operations, and hazardous material incidents.",
+      description:
+        "For fire emergencies, rescue operations, and hazardous material incidents.",
       numbers: ["0995 367 7872"],
       colorClass: "text-red-600 bg-red-50",
       borderClass: "border-red-100",
@@ -32,7 +35,8 @@ export default function EmergencyLines() {
     {
       id: 4,
       department: "Carcar Provincial Hospital",
-      description: "For medical emergencies, ambulance requests, and urgent care.",
+      description:
+        "For medical emergencies, ambulance requests, and urgent care.",
       numbers: ["(032) 487-8120", "(032) 487-8125"],
       colorClass: "text-teal-600 bg-teal-50",
       borderClass: "border-teal-100",
@@ -40,11 +44,12 @@ export default function EmergencyLines() {
     {
       id: 5,
       department: "CDRRMO Carcar",
-      description: "City Disaster Risk Reduction and Management Office for natural disasters.",
+      description:
+        "City Disaster Risk Reduction and Management Office for natural disasters.",
       numbers: ["(032) 345 6423", "0929 444 7161"],
       colorClass: "text-orange-600 bg-orange-50",
       borderClass: "border-orange-100",
-    }
+    },
   ];
 
   // Framer Motion Variants
@@ -52,18 +57,17 @@ export default function EmergencyLines() {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
+      transition: { staggerChildren: 0.1 },
+    },
   };
 
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-stone-50 to-emerald-100/50 font-sans selection:bg-emerald-200 selection:text-emerald-900">
-
       {/* Hero Image Section */}
       <div className="w-full h-[40vh] md:h-[50vh] relative mb-16">
         <img
@@ -93,8 +97,9 @@ export default function EmergencyLines() {
             transition={{ delay: 0.2 }}
             className="text-stone-200 max-w-2xl mx-auto text-lg"
           >
-            In case of an emergency, please contact the appropriate department immediately.
-            Always ensure your safety first and provide clear information when calling for help.
+            In case of an emergency, please contact the appropriate department
+            immediately. Always ensure your safety first and provide clear
+            information when calling for help.
           </motion.p>
         </div>
       </div>
@@ -130,7 +135,7 @@ export default function EmergencyLines() {
                 {contact.numbers.map((number, index) => (
                   <a
                     key={index}
-                    href={`tel:${number.replace(/[^0-9]/g, '')}`}
+                    href={`tel:${number.replace(/[^0-9]/g, "")}`}
                     className="group flex items-center justify-between p-4 bg-stone-50 rounded-xl hover:bg-stone-100 transition-colors duration-200"
                   >
                     <span className="font-bold text-stone-700 tracking-wide">
@@ -146,7 +151,6 @@ export default function EmergencyLines() {
           ))}
         </motion.div>
       </div>
-
     </div>
   );
 }

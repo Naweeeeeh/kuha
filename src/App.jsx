@@ -1,123 +1,201 @@
-import React, { useState } from 'react';
-import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import { Lock } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+  Navigate,
+} from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { Lock } from "lucide-react";
 
+import Navbar from "./components/layout/Navbar";
+import PageTransition from "./components/PageTransition";
 
-import Navbar from './components/layout/Navbar';
-import PageTransition from './components/PageTransition';
+import Home from "./pages/Home";
+import RequestForm from "./pages/RequestForm";
+import Transactions from "./pages/Transactions";
+import AdminLogs from "./pages/AdminLogs";
+import HeritagePage from "./pages/HeritagePage";
 
-import Home from './pages/Home';
-import RequestForm from './pages/RequestForm';
-import Transactions from './pages/Transactions';
-import AdminLogs from './pages/AdminLogs';
-import HeritagePage from './pages/HeritagePage';
-
-import Heritage from './pages/Heritage';
-import VisionMission from './pages/VisionMission';
-import EmergencyLines from './pages/EmergencyLines';
+import Heritage from "./pages/Heritage";
+import VisionMission from "./pages/VisionMission";
+import EmergencyLines from "./pages/EmergencyLines";
 
 const tuyomPassword = import.meta.env.VITE_TUYOMPASSWORD;
 
 export default function App() {
-    const location = useLocation();
-    const navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-    const [isAdmin, setIsAdmin] = useState(localStorage.getItem('secretary_auth') === 'true');
-    const [showAuthModal, setShowAuthModal] = useState(false);
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+  const [isAdmin, setIsAdmin] = useState(
+    localStorage.getItem("secretary_auth") === "true",
+  );
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-    const handleLogin = (e) => {
-        e.preventDefault();
+  const handleLogin = (e) => {
+    e.preventDefault();
 
-        if (password === tuyomPassword) {
-            localStorage.setItem('secretary_auth', 'true');
-            setIsAdmin(true);
-            setShowAuthModal(false);
-            setPassword('');
-            setError('');
-            navigate('/admin');
-        } else {
-            setError('Incorrect password. Access denied.');
-        }
-    };
+    if (password === tuyomPassword) {
+      localStorage.setItem("secretary_auth", "true");
+      setIsAdmin(true);
+      setShowAuthModal(false);
+      setPassword("");
+      setError("");
+      navigate("/admin");
+    } else {
+      setError("Incorrect password. Access denied.");
+    }
+  };
 
-    const handleLogout = () => {
-        localStorage.removeItem('secretary_auth');
-        setIsAdmin(false);
-        navigate('/');
-    };
+  const handleLogout = () => {
+    localStorage.removeItem("secretary_auth");
+    setIsAdmin(false);
+    navigate("/");
+  };
 
-    return (
-        <div className="min-h-screen bg-slate-50 flex flex-col font-sans relative">
+  return (
+    <div className="min-h-screen bg-slate-50 flex flex-col font-sans relative">
+      <Navbar isAdmin={isAdmin} onLogout={handleLogout} />
 
-            <Navbar isAdmin={isAdmin} onLogout={handleLogout} />
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route
+            path="/"
+            element={
+              <PageTransition>
+                <Home />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/request"
+            element={
+              <PageTransition>
+                <RequestForm />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/transactions"
+            element={
+              <PageTransition>
+                <Transactions />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/heritage"
+            element={
+              <PageTransition>
+                <HeritagePage />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              isAdmin ? (
+                <PageTransition>
+                  <AdminLogs />
+                </PageTransition>
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
+          />
 
-            <AnimatePresence mode="wait">
-                <Routes location={location} key={location.pathname}>
+          <Route
+            path="/heritage"
+            element={
+              <PageTransition>
+                <Heritage />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/vision-mission"
+            element={
+              <PageTransition>
+                <VisionMission />
+              </PageTransition>
+            }
+          />
+          <Route
+            path="/emergency-lines"
+            element={
+              <PageTransition>
+                <EmergencyLines />
+              </PageTransition>
+            }
+          />
+        </Routes>
+      </AnimatePresence>
 
-                    <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-                    <Route path="/request" element={<PageTransition><RequestForm /></PageTransition>} />
-                    <Route path="/transactions" element={<PageTransition><Transactions /></PageTransition>} />
-                    <Route path="/heritage" element={<PageTransition><HeritagePage /></PageTransition>} />
-                    <Route path="/admin" element={
-                        isAdmin ? <PageTransition><AdminLogs /></PageTransition> : <Navigate to="/" replace />
-                    } />
+      {!isAdmin && (
+        <button
+          onClick={() => setShowAuthModal(true)}
+          className="fixed bottom-4 left-4 p-3 rounded-full text-slate-300 hover:text-[#2D5128] hover:bg-[#E4EB9C]/50 transition-all z-40 opacity-30 hover:opacity-100"
+          title="Secretary Access"
+        >
+          <Lock size={16} />
+        </button>
+      )}
 
+      {showAuthModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#142C14]/40 backdrop-blur-sm animate-in fade-in duration-300">
+          <div className="bg-white rounded-[2rem] p-8 w-full max-w-sm shadow-2xl border border-[#8DA750]/20 animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
+            <div className="flex justify-between items-start mb-6">
+              <div className="w-12 h-12 bg-white-100/40 rounded-xl text-[#2D5128]">
+                <h3 className="font-heading font-black flex text-2xl text-[#142C14] mb-2">
+                  Secretary Login
+                </h3>
+              </div>
+              <button
+                onClick={() => {
+                  setShowAuthModal(false);
+                  setError("");
+                  setPassword("");
+                }}
+                className="p-2 text-slate-400 hover:text-red-500 rounded-full hover:bg-red-50 transition-colors"
+              >
+                <span className="font-bold text-xl">&#10005;</span>
+              </button>
+            </div>
 
-                    <Route path="/heritage" element={<PageTransition><Heritage /></PageTransition>} />
-                    <Route path="/vision-mission" element={<PageTransition><VisionMission /></PageTransition>} />
-                    <Route path="/emergency-lines" element={<PageTransition><EmergencyLines /></PageTransition>} />
+            <p className="text-sm text-slate-500 font-medium mb-6">
+              Enter the master password to access the Barangay logs and records.
+            </p>
 
-                </Routes>
-            </AnimatePresence>
-
-            {!isAdmin && (
-                <button
-                    onClick={() => setShowAuthModal(true)}
-                    className="fixed bottom-4 left-4 p-3 rounded-full text-slate-300 hover:text-[#2D5128] hover:bg-[#E4EB9C]/50 transition-all z-40 opacity-30 hover:opacity-100"
-                    title="Secretary Access"
-                >
-                    <Lock size={16} />
-                </button>
-            )}
-
-            {showAuthModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#142C14]/40 backdrop-blur-sm animate-in fade-in duration-300">
-                    <div className="bg-white rounded-[2rem] p-8 w-full max-w-sm shadow-2xl border border-[#8DA750]/20 animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
-                        <div className="flex justify-between items-start mb-6">
-                            <div className="w-12 h-12 bg-white-100/40 rounded-xl text-[#2D5128]">
-                                <h3 className="font-heading font-black flex text-2xl text-[#142C14] mb-2">Secretary Login</h3>
-                            </div>
-                            <button onClick={() => { setShowAuthModal(false); setError(''); setPassword(''); }} className="p-2 text-slate-400 hover:text-red-500 rounded-full hover:bg-red-50 transition-colors">
-                                <span className="font-bold text-xl">&#10005;</span>
-                            </button>
-                        </div>
-
-                        <p className="text-sm text-slate-500 font-medium mb-6">Enter the master password to access the Barangay logs and records.</p>
-
-                        <form onSubmit={handleLogin} className="space-y-4">
-                            <div>
-                                <input
-                                    type="password"
-                                    autoFocus
-                                    required
-                                    placeholder="Enter password"
-                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 font-medium focus:ring-2 focus:ring-[#2D5128] focus:border-transparent outline-none transition-all shadow-sm"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                                {error && <p className="text-xs text-red-500 font-bold mt-2 flex items-center gap-1">{error}</p>}
-                            </div>
-                            <button type="submit" className="w-full h-12 inline-flex items-center justify-center rounded-xl bg-[#2D5128] text-white font-bold transition-all hover:bg-[#142C14] shadow-lg active:scale-[0.98]">
-                                Unlock Access
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            )}
-
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <input
+                  type="password"
+                  autoFocus
+                  required
+                  placeholder="Enter password"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 font-medium focus:ring-2 focus:ring-[#2D5128] focus:border-transparent outline-none transition-all shadow-sm"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                {error && (
+                  <p className="text-xs text-red-500 font-bold mt-2 flex items-center gap-1">
+                    {error}
+                  </p>
+                )}
+              </div>
+              <button
+                type="submit"
+                className="w-full h-12 inline-flex items-center justify-center rounded-xl bg-[#2D5128] text-white font-bold transition-all hover:bg-[#142C14] shadow-lg active:scale-[0.98]"
+              >
+                Unlock Access
+              </button>
+            </form>
+          </div>
         </div>
-    );
+      )}
+    </div>
+  );
 }

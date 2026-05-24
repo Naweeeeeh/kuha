@@ -1,21 +1,11 @@
 import React, { useState } from "react";
 
 import { NavLink, Link } from "react-router-dom";
+import logo from "../../assets/kuha-logo.png";
 
-export const KuhaLogo = ({ className = "w-9 h-9" }) => (
+export const KuhaLogo = ({ className = "h-10 w-auto object-contain" }) => (
     <Link to="/" className="flex items-center gap-3 group transition-opacity hover:opacity-90 cursor-pointer">
-        <svg
-            viewBox="0 0 40 40"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className={className}
-        >
-            <rect width="40" height="40" rx="12" fill="#d1fae5" fillOpacity="0.8" />
-            <rect x="0.5" y="0.5" width="39" height="39" rx="11.5" stroke="#34d399" strokeOpacity="0.4" />
-            <path d="M14 10C12.8954 10 12 10.8954 12 12V28C12 29.1046 12.8954 30 14 30H26C27.1046 30 28 29.1046 28 28V16L22 10H14Z" stroke="#059669" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M22 10V16H28" stroke="#059669" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M20 17V24M17 21L20 24L23 21" stroke="#10b981" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <img src={logo} alt="KUHA Logo" className={className} />
         <span className="font-heading font-black text-xl tracking-tight text-stone-800">
             KUHA<span className="text-emerald-600">Portal</span>
         </span>
@@ -39,13 +29,13 @@ export default function Navbar({ isAdmin, onLogout }) {
         <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-200 shadow-sm flex flex-col transition-all">
             <div className="container max-w-6xl mx-auto px-6 py-2 flex items-center justify-between">
 
-                <KuhaLogo/>
+                <KuhaLogo />
 
                 <div className="hidden lg:flex flex-col items-end gap-1">
                     <div className="flex items-center gap-4">
-              <span className="font-heading font-black text-[10px] text-emerald-700 tracking-widest uppercase mr-2">
-                  Tuyom, City of Carcar, Cebu
-              </span>
+                        <span className="font-heading font-black text-[10px] text-emerald-700 tracking-widest uppercase mr-2">
+                            Tuyom, City of Carcar, Cebu
+                        </span>
 
                         {isAdmin && (
                             <button onClick={onLogout} className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-red-500 transition-colors bg-slate-50 px-2 py-1 rounded-md border border-slate-200 hover:border-red-200">
@@ -65,11 +55,11 @@ export default function Navbar({ isAdmin, onLogout }) {
                                         : `relative text-xs font-bold transition-colors ${isActive ? "text-emerald-700 border-b-2 border-emerald-500" : "text-stone-500 hover:text-emerald-600"}`
                                 }
                             >                                {l.isCta && (
-                                    <span className="relative flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-200 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-100"></span>
-                  </span>
-                                )}
+                                <span className="relative flex h-2.5 w-2.5">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-200 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-100"></span>
+                                </span>
+                            )}
                                 {l.label}
                             </NavLink>
                         ))}

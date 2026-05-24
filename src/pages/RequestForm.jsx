@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { supabase } from '../lib/supabase';
 import { PDFDownloadLink } from '@react-pdf/renderer';
@@ -7,6 +8,7 @@ import example2x2 from '../assets/example2x2.jpg';
 import { motion } from 'framer-motion';
 
 export default function RequestForm() {
+    const navigate = useNavigate();
     const [step, setStep] = useState(1);
     const [isCheckingSession, setIsCheckingSession] = useState(true);
 
@@ -55,6 +57,21 @@ export default function RequestForm() {
         setEmail('');
         setOtp('');
         setResendTimer(0);
+    };
+
+    const handleRequestAgain = () => {
+        setFormData({
+            documentType: 'Certificate of Indigency',
+            fullName: '',
+            age: '',
+            purok: '',
+            purpose: '',
+            fulfillmentMethod: 'digital',
+            idImageUrl: null
+        });
+        setImageFile(null);
+        setImagePreview(null);
+        setStep(3);
     };
 
     const validateStrictGmail = (emailString) => {
@@ -401,6 +418,21 @@ export default function RequestForm() {
 
                                             </div>
                                         )}
+                                    </div>
+
+                                    <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                                        <button 
+                                            onClick={handleRequestAgain}
+                                            className="h-14 w-full sm:w-auto inline-flex items-center justify-center px-8 rounded-xl bg-stone-200 text-stone-800 font-bold transition-all hover:bg-stone-300 shadow-sm active:scale-[0.98]"
+                                        >
+                                            Request Again
+                                        </button>
+                                        <button 
+                                            onClick={() => navigate('/')}
+                                            className="h-14 w-full sm:w-auto inline-flex items-center justify-center px-8 rounded-xl bg-emerald-500 text-white font-bold transition-all hover:bg-emerald-600 shadow-lg shadow-emerald-500/20 active:scale-[0.98]"
+                                        >
+                                            Done
+                                        </button>
                                     </div>
                                 </motion.div>
                             )}

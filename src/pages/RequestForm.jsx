@@ -181,29 +181,25 @@ export default function RequestForm() {
             )}
 
             <div className="container max-w-4xl mx-auto w-full">
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     className="text-center mb-12 relative"
                 >
                     {/* Removed decorative element */}
-                    
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-100/50 border border-emerald-200 text-emerald-700 text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
 
-                    </div>
                     <h2 className="font-heading text-4xl md:text-5xl font-extrabold text-stone-800 tracking-tight flex items-center justify-center gap-3">
                         Request <span className="text-emerald-500">Certificate</span>
                     </h2>
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.2 }}
                     className="bg-white rounded-[2.5rem] p-6 md:p-10 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] border border-stone-100 max-w-3xl mx-auto min-h-[400px] flex flex-col justify-center relative overflow-hidden"
                 >
-                    {/* Removed inner gradient */}
 
                     {isCheckingSession ? (
                         <div className="flex flex-col items-center justify-center text-stone-400 animate-pulse relative z-10">
@@ -213,10 +209,10 @@ export default function RequestForm() {
                     ) : (
                         <div className="relative z-10">
                             {step === 1 && (
-                                <motion.form 
+                                <motion.form
                                     initial={{ opacity: 0, x: 20 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    onSubmit={handleSendOTP} 
+                                    onSubmit={handleSendOTP}
                                     className="text-center space-y-6 py-6 max-w-sm mx-auto w-full"
                                 >
                                     <div className="w-16 h-16 bg-emerald-50 flex items-center justify-center rounded-2xl mx-auto text-emerald-600 mb-6 shadow-inner"><span className="text-3xl font-bold">@</span></div>
@@ -233,15 +229,15 @@ export default function RequestForm() {
                             )}
 
                             {step === 2 && (
-                                <motion.form 
+                                <motion.form
                                     initial={{ opacity: 0, x: 20 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    onSubmit={verifyOTP} 
+                                    onSubmit={verifyOTP}
                                     className="text-center space-y-6 py-6 max-w-sm mx-auto w-full"
                                 >
                                     <div className="w-16 h-16 bg-emerald-50 flex items-center justify-center rounded-2xl mx-auto text-emerald-600 mb-6 shadow-inner"><span className="text-3xl font-bold">!</span></div>
                                     <h3 className="font-heading font-extrabold text-2xl text-stone-800">Verify Identity</h3>
-                                    <p className="text-sm text-stone-500 font-medium">We sent a secure code to <br/><strong className="text-stone-800">{email}</strong></p>
+                                    <p className="text-sm text-stone-500 font-medium">We sent a secure code to <br /><strong className="text-stone-800">{email}</strong></p>
                                     <div className="space-y-4 pt-4 text-left">
                                         <label className={labelClass}>OTP</label>
                                         <input required type="text" placeholder="ENTER CODE" className={`${inputClass} text-center text-xl tracking-[0.5em] font-black uppercase py-4 bg-stone-100`} value={otp} onChange={e => setOtp(e.target.value)} />
@@ -261,10 +257,10 @@ export default function RequestForm() {
                             )}
 
                             {step === 3 && (
-                                <motion.form 
+                                <motion.form
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    onSubmit={submitRequest} 
+                                    onSubmit={submitRequest}
                                     className="space-y-8 w-full"
                                 >
                                     <div className="bg-emerald-50/50 border border-emerald-100 rounded-2xl p-5 flex items-center justify-between shadow-sm">
@@ -281,7 +277,7 @@ export default function RequestForm() {
 
                                     <div className="bg-stone-50/50 border border-stone-200 rounded-[2rem] p-6 shadow-sm">
                                         <label className={labelClass + " flex items-center gap-1 text-emerald-700"}>Select Document Type <span className="text-emerald-500 text-lg leading-none">*</span></label>
-                                        <select required className={`${inputClass} appearance-none cursor-pointer text-base font-bold bg-white`} value={formData.documentType} onChange={e => setFormData({...formData, documentType: e.target.value})}>
+                                        <select required className={`${inputClass} appearance-none cursor-pointer text-base font-bold bg-white`} value={formData.documentType} onChange={e => setFormData({ ...formData, documentType: e.target.value })}>
                                             <option value="Certificate of Indigency">Certificate of Indigency</option>
                                             <option value="Good Moral Certificate">Good Moral Certificate</option>
                                             <option value="Certificate of Residency">Certificate of Residency</option>
@@ -321,11 +317,11 @@ export default function RequestForm() {
                                     <div className="grid md:grid-cols-2 gap-6">
                                         <div>
                                             <label className={labelClass}>Full Name</label>
-                                            <input required type="text" className={inputClass} value={formData.fullName} onChange={e => setFormData({...formData, fullName: e.target.value})} />
+                                            <input required type="text" className={inputClass} value={formData.fullName} onChange={e => setFormData({ ...formData, fullName: e.target.value })} />
                                         </div>
                                         <div>
                                             <label className={labelClass}>Age</label>
-                                            <input required type="number" className={inputClass} value={formData.age} onChange={e => setFormData({...formData, age: e.target.value})} />
+                                            <input required type="number" className={inputClass} value={formData.age} onChange={e => setFormData({ ...formData, age: e.target.value })} />
                                             {formData.age && parseInt(formData.age, 10) < 0 && (
                                                 <p className="text-red-500 text-xs font-bold mt-2 px-1">Invalid Age</p>
                                             )}
@@ -335,7 +331,7 @@ export default function RequestForm() {
                                     <div className="grid md:grid-cols-2 gap-6">
                                         <div>
                                             <label className={labelClass}>Purok</label>
-                                            <select required className={`${inputClass} appearance-none cursor-pointer bg-white`} value={formData.purok} onChange={e => setFormData({...formData, purok: e.target.value})}>
+                                            <select required className={`${inputClass} appearance-none cursor-pointer bg-white`} value={formData.purok} onChange={e => setFormData({ ...formData, purok: e.target.value })}>
                                                 <option value="" disabled>Select your Purok</option>
                                                 <option value="Avocado">Avocado</option>
                                                 <option value="Buongon">Buongon</option>
@@ -349,13 +345,13 @@ export default function RequestForm() {
                                         </div>
                                         <div>
                                             <label className={labelClass}>Purpose</label>
-                                            <input required type="text" className={inputClass} value={formData.purpose} onChange={e => setFormData({...formData, purpose: e.target.value})} />
+                                            <input required type="text" className={inputClass} value={formData.purpose} onChange={e => setFormData({ ...formData, purpose: e.target.value })} />
                                         </div>
                                     </div>
 
                                     <div>
                                         <label className={labelClass}>Fulfillment Method</label>
-                                        <select className={`${inputClass} appearance-none cursor-pointer bg-white`} value={formData.fulfillmentMethod} onChange={e => setFormData({...formData, fulfillmentMethod: e.target.value})}>
+                                        <select className={`${inputClass} appearance-none cursor-pointer bg-white`} value={formData.fulfillmentMethod} onChange={e => setFormData({ ...formData, fulfillmentMethod: e.target.value })}>
                                             <option value="digital">Generate Digital PDF (Download)</option>
                                             <option value="physical">Request Physical Copy (Onsite Pickup)</option>
                                         </select>
@@ -368,7 +364,7 @@ export default function RequestForm() {
                             )}
 
                             {step === 4 && (
-                                <motion.div 
+                                <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     className="text-center space-y-8 py-6 w-full"

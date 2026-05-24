@@ -177,3 +177,12 @@ Before deployment, configure the same environment variables in the hosting provi
 ## Team
 
 Built for a CSIT360 project to support digital barangay services, document accessibility, and transparent public records for Barangay Tuyom.
+
+
+## Contributors
+- [x] Noeh Arbee Boiser
+- [x] Karol Vincent Bebedor
+- [x] Aldrin Suse
+- [x] Julian Ramil Andales
+- [x] Ignis Frostburn
+- [ ] Jude Mikael Valencia 

@@ -1,5 +1,5 @@
 meow meow meow meow
-Contributors:
+- Contributors:
 - [x] Noeh Arbee Boiser
 - [x] Karol Vincent Bebedor
 - [x] Aldrin Suse

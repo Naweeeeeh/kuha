@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, Download, Clock, MapPin, Printer, X, Eye, Wallet, Link as LinkIcon, CheckCircle2, LogOut, XCircle, Database } from 'lucide-react';
+
 import { supabase } from '../lib/supabase';
 import { PDFViewer } from '@react-pdf/renderer';
 import { CertificatePDF } from '../components/pdf/CertificatePDF';
 import { BrowserWallet, Transaction } from '@meshsdk/core';
 import { motion } from 'framer-motion';
+import { X, Check, RefreshCw, Eye, Printer } from 'lucide-react';
 
 export default function AdminLogs() {
     const [logs, setLogs] = useState([]);
@@ -73,7 +74,7 @@ export default function AdminLogs() {
 
     useEffect(() => {
         const checkSchedule = () => {
-            const pendingCount = logs.filter(l => !l.tx_hash).length;
+            const pendingCount = logs.filter(l => !l.tx_hash && l.status === 'verified').length;
 
             const now = new Date();
             const formatter = new Intl.DateTimeFormat('en-US', {
@@ -109,6 +110,23 @@ export default function AdminLogs() {
             setErrorModal({ show: true, message: err.message });
         } finally {
             setLoading(false);
+        }
+    };
+
+    const verifyRequest = async (log) => {
+        try {
+            const { error } = await supabase
+                .from('requests')
+                .update({ status: 'verified', verified_at: new Date().toISOString() })
+                .eq('id', log.id);
+
+            if (error) throw error;
+
+            setLogs(currentLogs => currentLogs.map(l =>
+                l.id === log.id ? { ...l, status: 'verified', verified_at: new Date().toISOString() } : l
+            ));
+        } catch (err) {
+            setErrorModal({ show: true, message: "Failed to verify: " + err.message });
         }
     };
 
@@ -216,7 +234,7 @@ export default function AdminLogs() {
     };
 
     const pushAllPending = async () => {
-        const pendingLogs = logs.filter(log => !log.tx_hash);
+        const pendingLogs = logs.filter(log => !log.tx_hash && log.status === 'verified');
         if (pendingLogs.length === 0) return;
 
         if (!walletAddress || !wallet) {
@@ -254,7 +272,7 @@ export default function AdminLogs() {
             }
 
             setLogs(currentLogs => currentLogs.map(l =>
-                !l.tx_hash ? { ...l, tx_hash: txHash, status: 'On-Chain' } : l
+                (!l.tx_hash && l.status === 'verified') ? { ...l, tx_hash: txHash, status: 'On-Chain' } : l
             ));
 
             localStorage.setItem('cardano_connected_time', Date.now().toString());
@@ -274,14 +292,14 @@ export default function AdminLogs() {
     };
 
     return (
-        <section className="bg-stone-50 py-16 px-6 flex-1 min-h-[calc(100vh-70px)] selection:bg-emerald-200 selection:text-emerald-900">
+        <section className="bg-gradient-to-br from-emerald-50 via-stone-50 to-emerald-100/50 py-16 px-6 flex-1 min-h-[calc(100vh-70px)] selection:bg-emerald-200 selection:text-emerald-900">
 
             {showWalletModal && (
                 <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-stone-900/60 backdrop-blur-md animate-in fade-in duration-300">
                     <div className="bg-white rounded-[2rem] p-8 w-full max-w-sm shadow-2xl border border-stone-200 animate-in zoom-in-95 slide-in-from-bottom-4 duration-300 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_top_right,_rgba(16,185,129,0.1),_transparent_70%)] pointer-events-none"></div>
+                        {/* Removed radial gradient */}
                         <button onClick={() => setShowWalletModal(false)} className="absolute top-6 right-6 text-stone-400 hover:text-stone-800 transition-colors bg-stone-50 hover:bg-stone-100 p-2 rounded-full">
-                            <X size={20} strokeWidth={2.5} />
+                            <X size={20} className="stroke-[3]" />
                         </button>
                         <h3 className="font-heading font-extrabold text-2xl text-stone-800 mb-2">Connect Wallet</h3>
                         <p className="text-sm text-stone-500 font-medium leading-relaxed mb-6">
@@ -316,7 +334,7 @@ export default function AdminLogs() {
                 <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-stone-900/60 backdrop-blur-md animate-in fade-in duration-300">
                     <div className="bg-white rounded-[2rem] p-8 w-full max-w-md shadow-2xl border border-red-100 text-center animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
                         <div className="w-16 h-16 bg-red-50 flex items-center justify-center rounded-2xl mx-auto text-red-500 mb-6 shadow-inner">
-                            <XCircle size={32} />
+                            <X size={32} className="stroke-[3]" />
                         </div>
                         <h3 className="font-heading font-extrabold text-2xl text-stone-800 mb-2">Transaction Failed</h3>
                         <p className="text-sm text-stone-500 font-medium leading-relaxed mb-8 break-words bg-stone-50 p-4 rounded-xl border border-stone-100">
@@ -335,7 +353,7 @@ export default function AdminLogs() {
             {successModal.show && (
                 <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-stone-900/60 backdrop-blur-md animate-in fade-in duration-300">
                     <div className="bg-white rounded-[2rem] p-8 w-full max-w-md shadow-2xl border border-emerald-100 text-center animate-in zoom-in-95 slide-in-from-bottom-4 duration-300 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-48 h-48 bg-[radial-gradient(circle_at_top_right,_rgba(16,185,129,0.1),_transparent_70%)] pointer-events-none"></div>
+                        {/* Removed radial gradient */}
                         <h3 className="font-heading font-extrabold text-3xl text-stone-800 mb-2">Success!</h3>
                         <p className="text-sm text-stone-500 font-medium leading-relaxed mb-6">
                             The document record has been permanently secured on the Cardano blockchain.
@@ -353,7 +371,7 @@ export default function AdminLogs() {
                                 rel="noreferrer"
                                 className="w-full h-12 inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 text-white font-bold transition-all hover:bg-emerald-600 shadow-lg shadow-emerald-500/20 active:scale-[0.98]"
                             >
-                                <LinkIcon size={16} /> View on Explorer
+                                View on Explorer
                             </a>
                             <button
                                 onClick={() => setSuccessModal({ show: false, hash: '' })}
@@ -372,7 +390,7 @@ export default function AdminLogs() {
                         <div className="flex items-center justify-between px-6 py-4 border-b border-stone-100 bg-stone-50">
                             <div className="flex items-center gap-4">
                                 <div className="w-12 h-12 bg-emerald-100 flex items-center justify-center rounded-xl text-emerald-600 shadow-inner">
-                                    <Printer size={24} />
+                                    <Printer size={24} className="stroke-[2.5]" />
                                 </div>
                                 <div>
                                     <h3 className="font-heading font-extrabold text-stone-800 text-lg leading-tight">Document Print Preview</h3>
@@ -382,7 +400,7 @@ export default function AdminLogs() {
                                 </div>
                             </div>
                             <button onClick={() => setSelectedLog(null)} className="p-3 bg-white rounded-full text-stone-400 hover:text-red-500 hover:bg-red-50 transition-colors shadow-sm border border-stone-200">
-                                <X size={20} strokeWidth={2.5} />
+                                <X size={20} className="stroke-[3]" />
                             </button>
                         </div>
                         <div className="flex-1 w-full bg-stone-200 p-2 md:p-6">
@@ -398,7 +416,7 @@ export default function AdminLogs() {
 
             <div className="container max-w-7xl mx-auto w-full relative">
 
-                <div className="absolute top-0 right-1/4 w-64 h-64 bg-emerald-200 blur-[120px] rounded-full -z-10 opacity-40"></div>
+                {/* Removed blur gradient */}
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -408,7 +426,7 @@ export default function AdminLogs() {
                 >
                     <div>
                         <h2 className="font-heading text-4xl md:text-5xl font-extrabold text-stone-800 tracking-tight">
-                            Document <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">Logs</span>
+                            Document <span className="text-emerald-500">Logs</span>
                         </h2>
                         <p className="text-stone-500 text-lg font-medium mt-3 max-w-md">
                             Manage, preview, and securely log requested certificates to the blockchain.
@@ -418,21 +436,21 @@ export default function AdminLogs() {
                     <div className="flex flex-wrap items-center gap-4">
                         {!walletAddress ? (
                             <button onClick={handleConnectClick} className="flex items-center gap-2 bg-stone-800 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-black transition-all shadow-lg active:scale-95">
-                                <Wallet size={18} /> Connect Wallet
+                                Connect Wallet
                             </button>
                         ) : (
                             <div className="flex items-center gap-3">
                                 <div className="flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-5 py-3 rounded-xl font-bold text-sm shadow-sm">
-                                    <CheckCircle2 size={16} className="text-emerald-500" />
+                                    <Check size={16} className="stroke-[3] text-emerald-500" />
                                     <span className="capitalize">{localStorage.getItem('cardano_wallet_name')}:</span>
                                     {walletAddress.substring(0, 8)}...{walletAddress.substring(walletAddress.length - 4)}
                                 </div>
                                 <button
                                     onClick={disconnectWallet}
-                                    className="p-3.5 rounded-xl bg-white border border-stone-200 text-stone-500 hover:text-red-600 hover:border-red-200 hover:bg-red-50 font-bold transition-all shadow-sm"
+                                    className="p-3.5 rounded-xl bg-white border border-stone-200 text-stone-500 hover:text-white-600 hover:border-green-200 hover:bg-green-50 font-bold transition-all shadow-sm"
                                     title="Disconnect Wallet"
                                 >
-                                    <LogOut size={16} />
+                                    <span className="font-bold text-xs uppercase">disconnect</span>
                                 </button>
                             </div>
                         )}
@@ -446,21 +464,20 @@ export default function AdminLogs() {
 
                             <div className="flex items-center gap-3">
                                 <button onClick={fetchLogs} className="p-2 text-stone-400 hover:text-emerald-600 transition-colors" title="Refresh">
-                                    <Clock size={18} />
+                                    <RefreshCw size={20} className="stroke-[2.5]" />
                                 </button>
 
-                                {logs.filter(l => !l.tx_hash).length > 0 && (
+                                {logs.filter(l => !l.tx_hash && l.status === 'verified').length > 0 && (
                                     <button
                                         onClick={pushAllPending}
                                         disabled={isBatching || !walletAddress}
-                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-xs transition-all ${
-                                            needsDailyPush
-                                                ? 'bg-red-500 text-white animate-pulse hover:bg-red-600 shadow-lg shadow-red-500/30'
-                                                : 'bg-stone-800 text-white hover:bg-black'
-                                        } disabled:opacity-50 disabled:animate-none`}
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-xs transition-all ${needsDailyPush
+                                            ? 'bg-blue-500 text-white animate-pulse hover:bg-blue-600 shadow-lg shadow-blue-500/30'
+                                            : 'bg-stone-800 text-white hover:bg-black'
+                                            } disabled:opacity-50 disabled:animate-none`}
                                     >
-                                        <Database size={14} />
-                                        {isBatching ? 'Batching...' : `Push All Pending (${logs.filter(l => !l.tx_hash).length})`}
+
+                                        {isBatching ? 'Batching...' : `Push All Verified (${logs.filter(l => !l.tx_hash && l.status === 'verified').length})`}
                                     </button>
                                 )}
                             </div>
@@ -477,93 +494,100 @@ export default function AdminLogs() {
                     <div className="overflow-x-auto no-scrollbar">
                         <table className="w-full text-left border-collapse min-w-[900px]">
                             <thead>
-                            <tr className="bg-stone-50/50 border-b-2 border-stone-100">
-                                <th className="px-8 py-5 text-[10px] font-black text-stone-400 uppercase tracking-widest whitespace-nowrap">Resident Details</th>
-                                <th className="px-8 py-5 text-[10px] font-black text-stone-400 uppercase tracking-widest whitespace-nowrap">Document Type</th>
-                                <th className="px-8 py-5 text-[10px] font-black text-stone-400 uppercase tracking-widest whitespace-nowrap">Fulfillment</th>
-                                <th className="px-8 py-5 text-[10px] font-black text-stone-400 uppercase tracking-widest whitespace-nowrap text-right">Actions</th>
-                            </tr>
+                                <tr className="bg-stone-50/50 border-b-2 border-stone-100">
+                                    <th className="px-8 py-5 text-[10px] font-black text-stone-400 uppercase tracking-widest whitespace-nowrap">Resident Details</th>
+                                    <th className="px-8 py-5 text-[10px] font-black text-stone-400 uppercase tracking-widest whitespace-nowrap">Document Type</th>
+                                    <th className="px-8 py-5 text-[10px] font-black text-stone-400 uppercase tracking-widest whitespace-nowrap">Fulfillment</th>
+                                    <th className="px-8 py-5 text-[10px] font-black text-stone-400 uppercase tracking-widest whitespace-nowrap text-right">Actions</th>
+                                </tr>
                             </thead>
 
                             <tbody className="divide-y divide-stone-50 text-sm font-semibold text-stone-600">
-                            {loading ? (
-                                <tr>
-                                    <td colSpan="4" className="px-6 py-20 text-center text-emerald-500">
-                                        <div className="animate-pulse flex flex-col items-center gap-3">
-                                            <Clock size={32} className="animate-spin-slow" />
-                                            <span className="text-xs font-bold uppercase tracking-widest">Syncing Records...</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ) : logs.length === 0 ? (
-                                <tr>
-                                    <td colSpan="4" className="px-6 py-20 text-center text-stone-400">
-                                        <FileText size={40} className="mx-auto mb-4 opacity-20" />
-                                        <span className="text-sm font-medium">No document requests found.</span>
-                                    </td>
-                                </tr>
-                            ) : (
-                                logs.map((log, index) => (
-                                    <motion.tr
-                                        initial={{ opacity: 0, x: -10 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ duration: 0.3, delay: index * 0.05 }}
-                                        key={log.id}
-                                        className="hover:bg-emerald-50/30 transition-colors group"
-                                    >
-                                        <td className="px-8 py-5 whitespace-nowrap">
-                                            <div className="flex items-center gap-4">
-                                                <div className="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center text-emerald-700 font-extrabold text-lg border border-emerald-200 shadow-sm group-hover:scale-105 transition-transform">
-                                                    {log.full_name.charAt(0).toUpperCase()}
-                                                </div>
-                                                <div>
-                                                    <div className="font-extrabold text-stone-800 text-base">{log.full_name}</div>
-                                                    <div className="text-xs text-stone-500 font-medium flex items-center gap-1.5 mt-1">
-                                                        <MapPin size={12} className="text-emerald-500" /> Purok {log.purok} • {log.age} yrs
+                                {loading ? (
+                                    <tr>
+                                        <td colSpan="4" className="px-6 py-20 text-center text-emerald-500">
+                                            <div className="animate-pulse flex flex-col items-center gap-3">
+
+                                                <span className="text-xs font-bold uppercase tracking-widest">Syncing Records...</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ) : logs.length === 0 ? (
+                                    <tr>
+                                        <td colSpan="4" className="px-6 py-20 text-center text-stone-400">
+
+                                            <span className="text-sm font-medium">No document requests found.</span>
+                                        </td>
+                                    </tr>
+                                ) : (
+                                    logs.map((log, index) => (
+                                        <motion.tr
+                                            initial={{ opacity: 0, x: -10 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ duration: 0.3, delay: index * 0.05 }}
+                                            key={log.id}
+                                            className="hover:bg-emerald-50/30 transition-colors group"
+                                        >
+                                            <td className="px-8 py-5 whitespace-nowrap">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center text-emerald-700 font-extrabold text-lg border border-emerald-200 shadow-sm group-hover:scale-105 transition-transform">
+                                                        {log.full_name.charAt(0).toUpperCase()}
+                                                    </div>
+                                                    <div>
+                                                        <div className="font-extrabold text-stone-800 text-base">{log.full_name}</div>
+                                                        <div className="text-xs text-stone-500 font-medium flex items-center gap-1.5 mt-1">
+                                                            Purok {log.purok} • {log.age} yrs
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-5">
-                                            <div className="flex flex-col">
-                                                <span className="inline-flex font-extrabold text-sm text-emerald-700">{log.document_type || 'Certificate of Indigency'}</span>
-                                                <span className="text-[10px] text-stone-400 uppercase tracking-wider font-bold mt-1.5">Purpose: <span className="text-stone-500">{log.purpose}</span></span>
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-5 whitespace-nowrap">
-                                            <div className="flex flex-col gap-2">
-                                                {log.fulfillment_method === 'digital' ? (
-                                                    <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-blue-700 bg-blue-100 px-2.5 py-1 rounded-md w-fit border border-blue-200 shadow-sm"><Download size={12} /> Digital</span>
-                                                ) : (
-                                                    <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-orange-700 bg-orange-100 px-2.5 py-1 rounded-md w-fit border border-orange-200 shadow-sm"><MapPin size={12} /> Physical Pickup</span>
-                                                )}
-                                                <span className="text-[10px] text-stone-400 font-bold">{formatDate(log.created_at)}</span>
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-5 whitespace-nowrap text-right">
-                                            <div className="flex items-center justify-end gap-3">
-                                                <button onClick={() => setSelectedLog(log)} className="inline-flex items-center gap-2 text-xs font-bold bg-white text-stone-600 border border-stone-200 px-4 py-2.5 rounded-xl hover:bg-stone-50 hover:text-stone-800 transition-all active:scale-95 shadow-sm">
-                                                    <Eye size={16} /> View
-                                                </button>
-
-                                                {log.tx_hash ? (
-                                                    <a href={`https://preview.cardanoscan.io/transaction/${log.tx_hash}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-xs font-bold bg-gradient-to-r from-emerald-500 to-teal-400 text-white shadow-md shadow-emerald-500/20 px-4 py-2.5 rounded-xl hover:opacity-90 transition-all active:scale-95">
-                                                        <LinkIcon size={14} /> On-Chain
-                                                    </a>
-                                                ) : (
-                                                    <button
-                                                        onClick={() => logToBlockchain(log)}
-                                                        disabled={isTransacting || !walletAddress}
-                                                        className="inline-flex items-center gap-2 text-xs font-bold bg-stone-800 text-white px-4 py-2.5 rounded-xl hover:bg-black transition-all disabled:opacity-50 disabled:bg-stone-300 disabled:text-stone-500 disabled:cursor-not-allowed active:scale-95 shadow-md"
-                                                    >
-                                                        <Wallet size={14} /> {isTransacting ? 'Signing...' : 'Push to Ledger'}
+                                            </td>
+                                            <td className="px-8 py-5">
+                                                <div className="flex flex-col">
+                                                    <span className="inline-flex font-extrabold text-sm text-emerald-700">{log.document_type || 'Certificate of Indigency'}</span>
+                                                    <span className="text-[10px] text-stone-400 uppercase tracking-wider font-bold mt-1.5">Purpose: <span className="text-stone-500">{log.purpose}</span></span>
+                                                </div>
+                                            </td>
+                                            <td className="px-8 py-5 whitespace-nowrap">
+                                                <div className="flex flex-col gap-2">
+                                                    {log.fulfillment_method === 'digital' ? (
+                                                        <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-blue-700 bg-blue-100 px-2.5 py-1 rounded-md w-fit border border-blue-200 shadow-sm">Digital</span>
+                                                    ) : (
+                                                        <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-orange-700 bg-orange-100 px-2.5 py-1 rounded-md w-fit border border-orange-200 shadow-sm">Physical Pickup</span>
+                                                    )}
+                                                    <span className="text-[10px] text-stone-400 font-bold">{formatDate(log.created_at)}</span>
+                                                </div>
+                                            </td>
+                                            <td className="px-8 py-5 whitespace-nowrap text-right">
+                                                <div className="flex items-center justify-end gap-3">
+                                                    <button onClick={() => setSelectedLog(log)} className="inline-flex items-center gap-2 text-xs font-bold bg-white text-stone-600 border border-stone-200 px-4 py-2.5 rounded-xl hover:bg-stone-50 hover:text-stone-800 transition-all active:scale-95 shadow-sm">
+                                                        <Eye size={16} />View
                                                     </button>
-                                                )}
-                                            </div>
-                                        </td>
-                                    </motion.tr>
-                                ))
-                            )}
+
+                                                    {log.tx_hash ? (
+                                                        <a href={`https://preview.cardanoscan.io/transaction/${log.tx_hash}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-xs font-bold bg-emerald-500 text-white shadow-md shadow-emerald-500/20 px-4 py-2.5 rounded-xl hover:opacity-90 transition-all active:scale-95">
+                                                            On-Chain
+                                                        </a>
+                                                    ) : log.status === 'pending' ? (
+                                                        <button
+                                                            onClick={() => verifyRequest(log)}
+                                                            className="inline-flex items-center gap-2 text-xs font-bold bg-amber-500 text-white px-4 py-2.5 rounded-xl hover:bg-amber-600 transition-all active:scale-95 shadow-md"
+                                                        >
+                                                            <Check size={16} className="stroke-[3]" /> Verify
+                                                        </button>
+                                                    ) : (
+                                                        <button
+                                                            onClick={() => logToBlockchain(log)}
+                                                            disabled={isTransacting || !walletAddress}
+                                                            className="inline-flex items-center gap-2 text-xs font-bold bg-stone-800 text-white px-4 py-2.5 rounded-xl hover:bg-black transition-all disabled:opacity-50 disabled:bg-stone-300 disabled:text-stone-500 disabled:cursor-not-allowed active:scale-95 shadow-md"
+                                                        >
+                                                            {isTransacting ? 'Signing...' : 'Push to Ledger'}
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            </td>
+                                        </motion.tr>
+                                    ))
+                                )}
                             </tbody>
                         </table>
                     </div>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { Lock, X, ShieldAlert } from 'lucide-react';
+import { Lock } from 'lucide-react';
+
 
 import Navbar from './components/layout/Navbar';
 import PageTransition from './components/PageTransition';
@@ -64,7 +65,7 @@ export default function App() {
                         isAdmin ? <PageTransition><AdminLogs /></PageTransition> : <Navigate to="/" replace />
                     } />
 
-                    
+
                     <Route path="/heritage" element={<PageTransition><Heritage /></PageTransition>} />
                     <Route path="/vision-mission" element={<PageTransition><VisionMission /></PageTransition>} />
                     <Route path="/emergency-lines" element={<PageTransition><EmergencyLines /></PageTransition>} />
@@ -90,7 +91,7 @@ export default function App() {
                                 <h3 className="font-heading font-black flex text-2xl text-[#142C14] mb-2">Secretary Login</h3>
                             </div>
                             <button onClick={() => { setShowAuthModal(false); setError(''); setPassword(''); }} className="p-2 text-slate-400 hover:text-red-500 rounded-full hover:bg-red-50 transition-colors">
-                                <X size={20} />
+                                <span className="font-bold text-xl">&#10005;</span>
                             </button>
                         </div>
 
@@ -107,7 +108,7 @@ export default function App() {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
-                                {error && <p className="text-xs text-red-500 font-bold mt-2 flex items-center gap-1"><ShieldAlert size={12}/> {error}</p>}
+                                {error && <p className="text-xs text-red-500 font-bold mt-2 flex items-center gap-1">{error}</p>}
                             </div>
                             <button type="submit" className="w-full h-12 inline-flex items-center justify-center rounded-xl bg-[#2D5128] text-white font-bold transition-all hover:bg-[#142C14] shadow-lg active:scale-[0.98]">
                                 Unlock Access

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Building, Target, PhoneCall, FileText, ChevronDown, MapPin, Users, Heart } from "lucide-react";
+
 import { motion } from "framer-motion";
 import barangayLandscape from '../assets/barangaylandscape.png';
 import ourHeritageImg from "../assets/our-heritage-img.jpeg";
@@ -9,7 +9,6 @@ import emergencyLinesImg from "../assets/emergency-lines-img.jpg";
 export default function Home() {
   const cards = [
     {
-      icon: Building,
       title: "Our Heritage",
       desc: "Explore the rich history and cultural landmarks of our beloved barangay.",
       imgUrl: ourHeritageImg,
@@ -18,7 +17,6 @@ export default function Home() {
       link: "/heritage"
     },
     {
-      icon: Target,
       title: "Vision & Mission",
       desc: "A progressive community promoting sustainable development and inclusivity.",
       imgUrl: missionVisionImg,
@@ -27,7 +25,6 @@ export default function Home() {
       link: "/vision-mission"
     },
     {
-      icon: PhoneCall,
       title: "Emergency Lines",
       desc: "Reach the Punong Barangay office directly for immediate assistance.",
       imgUrl: emergencyLinesImg,
@@ -38,9 +35,9 @@ export default function Home() {
   ];
 
   const stats = [
-    { label: "Residents", value: "12,450+", icon: Users },
-    { label: "Puroks", value: "8", icon: MapPin },
-    { label: "Community Programs", value: "24+", icon: Heart },
+    { label: "Residents", value: "12,450+" },
+    { label: "Puroks", value: "8" },
+    { label: "Community Programs", value: "24+" },
   ];
 
   const containerVariants = {
@@ -57,7 +54,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 font-sans pb-24 selection:bg-emerald-200 selection:text-emerald-900">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-stone-50 to-emerald-100/50 font-sans pb-24 selection:bg-emerald-200 selection:text-emerald-900">
 
       {/* HERO SECTION */}
       <section className="relative min-h-[85vh] flex flex-col justify-center overflow-hidden bg-[#0A2318]">
@@ -107,7 +104,7 @@ export default function Home() {
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           >
-            <ChevronDown size={24} />
+            <span className="text-2xl font-bold">&#8964;</span>
           </motion.div>
         </motion.div>
       </section>
@@ -123,9 +120,7 @@ export default function Home() {
         >
           {stats.map((stat, idx) => (
             <div key={idx} className="bg-[#0C2418] hover:bg-[#14613b] backdrop-blur-xl rounded-[2rem] p-6 border-5 border-white/95 md:p-8 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] flex items-center gap-6 transition-all duration-300 hover:-translate-y-1">
-              <div className="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 shrink-0 shadow-inner">
-                <stat.icon size={32} strokeWidth={2} />
-              </div>
+
               <div>
                 <div className="text-3xl md:text-4xl font-extrabold text-white/90 tracking-tight">{stat.value}</div>
                 <div className="text-sm font-semibold text-white/80 uppercase tracking-wider mt-1">{stat.label}</div>
@@ -189,15 +184,12 @@ export default function Home() {
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />
                         <div className="absolute top-5 right-5 p-3.5 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl z-20 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
-                            <div className={`${c.iconColor}`}>
-                                <c.icon size={26} strokeWidth={2.5} />
-                            </div>
+
                         </div>
                     </div>
 
                     <div className="p-8 flex flex-col flex-1 relative bg-white">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-stone-50 rounded-bl-full -z-10 transition-transform duration-700 group-hover:scale-150 opacity-50"></div>
-
+                        {/* Removed decorative rounded element */}
                         <h4 className="font-extrabold text-stone-800 text-2xl mb-3 group-hover:text-emerald-600 transition-colors">
                             {c.title}
                         </h4>
@@ -207,7 +199,7 @@ export default function Home() {
 
                         <div className="mt-8 flex items-center gap-2 text-sm font-bold text-stone-400 group-hover:text-emerald-600 transition-colors uppercase tracking-widest">
                             Learn more
-                            <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                            <span className="transition-transform group-hover:translate-x-1 font-bold text-xl ml-2">&rarr;</span>
                         </div>
                     </div>
                 </motion.div>
@@ -223,10 +215,7 @@ export default function Home() {
           transition={{ duration: 0.7 }}
           className="relative bg-stone-900 rounded-[3rem] p-10 md:p-16 overflow-hidden shadow-2xl mt-24"
         >
-          {/* Decorative background elements */}
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(circle_at_top_right,_rgba(16,185,129,0.15),_transparent_60%)] -translate-y-1/2 translate-x-1/3"></div>
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle_at_bottom_left,_rgba(16,185,129,0.1),_transparent_50%)] translate-y-1/3 -translate-x-1/4"></div>
-
+          {/* Removed decorative background elements */}
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="text-center md:text-left max-w-2xl">
               <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-5 leading-tight">
@@ -241,9 +230,8 @@ export default function Home() {
               to="/request"
               className="group w-full md:w-auto flex items-center justify-center gap-3 bg-emerald-500 text-white py-5 px-10 rounded-full font-bold text-xl shadow-[0_8px_30px_0_rgba(16,185,129,0.3)] transition-all hover:scale-105 hover:bg-emerald-400 shrink-0"
             >
-              <FileText size={26} className="group-hover:scale-110 transition-transform" />
               <span>Start Request</span>
-              <ArrowRight size={26} className="ml-1 group-hover:translate-x-1 transition-transform" />
+              <span className="font-bold text-xl ml-2 group-hover:translate-x-1 transition-transform">&rarr;</span>
             </Link>
           </div>
         </motion.div>

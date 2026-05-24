@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, X, Lock } from "lucide-react";
+
 import { NavLink, Link } from "react-router-dom";
 
 export const KuhaLogo = ({ className = "w-9 h-9" }) => (
@@ -43,7 +43,7 @@ export default function Navbar({ isAdmin, onLogout }) {
 
                 <div className="hidden lg:flex flex-col items-end gap-1">
                     <div className="flex items-center gap-4">
-              <span className="font-heading font-black text-[10px] bg-gradient-to-r from-emerald-800 to-emerald-500 bg-clip-text text-transparent tracking-widest uppercase mr-2">
+              <span className="font-heading font-black text-[10px] text-emerald-700 tracking-widest uppercase mr-2">
                   Tuyom, City of Carcar, Cebu
               </span>
 
@@ -77,7 +77,7 @@ export default function Navbar({ isAdmin, onLogout }) {
                 </div>
 
                 <button className="lg:hidden relative p-2 text-stone-800 hover:bg-emerald-50 rounded-xl" onClick={() => setOpen(!open)}>
-                    {open ? <X size={26} /> : <Menu size={26} />}
+                    {open ? <span className="font-bold text-xl">&#10005;</span> : <span className="font-bold text-xl">&#9776;</span>}
                 </button>
             </div>
 

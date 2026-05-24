@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, CheckCircle2, Download, MapPin, ShieldAlert, Camera, UploadCloud, X, Mail } from 'lucide-react';
+
 import { supabase } from '../lib/supabase';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { CertificatePDF } from '../components/pdf/CertificatePDF';
@@ -145,8 +145,7 @@ export default function RequestForm() {
                 email: email,
                 fulfillment_method: formData.fulfillmentMethod,
                 id_picture_url: uploadedImageUrl,
-                status: 'verified',
-                verified_at: new Date().toISOString()
+                status: 'pending'
             }]);
 
             if (dbError) throw dbError;
@@ -166,12 +165,12 @@ export default function RequestForm() {
     const isSubmitDisabled = !imageFile || loading || !formData.age || parseInt(formData.age, 10) < 0;
 
     return (
-        <section className="bg-stone-50 min-h-[calc(100vh-70px)] py-16 px-6 flex flex-col items-center selection:bg-emerald-200 selection:text-emerald-900 relative">
+        <section className="bg-gradient-to-br from-emerald-50 via-stone-50 to-emerald-100/50 min-h-[calc(100vh-70px)] py-16 px-6 flex flex-col items-center selection:bg-emerald-200 selection:text-emerald-900 relative">
 
             {modal.show && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/40 backdrop-blur-sm animate-in fade-in duration-300">
                     <div className="bg-white rounded-[2rem] p-8 w-full max-w-sm shadow-2xl border border-stone-200 text-center animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
-                        <div className="w-16 h-16 bg-red-50 flex items-center justify-center rounded-2xl mx-auto text-red-500 mb-6"><ShieldAlert size={32} /></div>
+                        <div className="w-16 h-16 bg-red-50 flex items-center justify-center rounded-2xl mx-auto text-red-500 mb-6"><span className="text-3xl font-bold">!</span></div>
                         <h3 className="font-heading font-black text-2xl text-stone-800 mb-2">{modal.type === 'error' ? 'Action Required' : 'Notice'}</h3>
                         <p className="text-sm text-stone-500 font-medium leading-relaxed mb-8">{modal.message}</p>
                         <button onClick={() => setModal({ show: false, message: '', type: 'error' })} className="w-full h-14 inline-flex items-center justify-center rounded-xl bg-stone-800 text-white font-bold transition-all hover:bg-black shadow-lg active:scale-[0.98]">
@@ -188,13 +187,13 @@ export default function RequestForm() {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-12 relative"
                 >
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-emerald-200 blur-[100px] rounded-full -z-10 opacity-50"></div>
+                    {/* Removed decorative element */}
                     
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-100/50 border border-emerald-200 text-emerald-700 text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
-                        <FileText size={14} /> Application Portal
+
                     </div>
                     <h2 className="font-heading text-4xl md:text-5xl font-extrabold text-stone-800 tracking-tight flex items-center justify-center gap-3">
-                        Request <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">Certificate</span>
+                        Request <span className="text-emerald-500">Certificate</span>
                     </h2>
                 </motion.div>
 
@@ -204,11 +203,11 @@ export default function RequestForm() {
                     transition={{ duration: 0.7, delay: 0.2 }}
                     className="bg-white rounded-[2.5rem] p-6 md:p-10 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] border border-stone-100 max-w-3xl mx-auto min-h-[400px] flex flex-col justify-center relative overflow-hidden"
                 >
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle_at_top_right,_rgba(16,185,129,0.05),_transparent_70%)] pointer-events-none"></div>
+                    {/* Removed inner gradient */}
 
                     {isCheckingSession ? (
                         <div className="flex flex-col items-center justify-center text-stone-400 animate-pulse relative z-10">
-                            <ShieldAlert size={32} className="mb-4 opacity-50" />
+
                             <p className="text-[10px] font-black uppercase tracking-widest">Checking secure session...</p>
                         </div>
                     ) : (
@@ -220,7 +219,7 @@ export default function RequestForm() {
                                     onSubmit={handleSendOTP} 
                                     className="text-center space-y-6 py-6 max-w-sm mx-auto w-full"
                                 >
-                                    <div className="w-16 h-16 bg-emerald-50 flex items-center justify-center rounded-2xl mx-auto text-emerald-600 mb-6 shadow-inner"><Mail size={32} /></div>
+                                    <div className="w-16 h-16 bg-emerald-50 flex items-center justify-center rounded-2xl mx-auto text-emerald-600 mb-6 shadow-inner"><span className="text-3xl font-bold">@</span></div>
                                     <h3 className="font-heading font-extrabold text-2xl text-stone-800">Start Request</h3>
                                     <p className="text-sm text-stone-500 font-medium">Verify your email address to access the official document request forms.</p>
                                     <div className="text-left pt-4">
@@ -240,7 +239,7 @@ export default function RequestForm() {
                                     onSubmit={verifyOTP} 
                                     className="text-center space-y-6 py-6 max-w-sm mx-auto w-full"
                                 >
-                                    <div className="w-16 h-16 bg-emerald-50 flex items-center justify-center rounded-2xl mx-auto text-emerald-600 mb-6 shadow-inner"><ShieldAlert size={32} /></div>
+                                    <div className="w-16 h-16 bg-emerald-50 flex items-center justify-center rounded-2xl mx-auto text-emerald-600 mb-6 shadow-inner"><span className="text-3xl font-bold">!</span></div>
                                     <h3 className="font-heading font-extrabold text-2xl text-stone-800">Verify Identity</h3>
                                     <p className="text-sm text-stone-500 font-medium">We sent a secure code to <br/><strong className="text-stone-800">{email}</strong></p>
                                     <div className="space-y-4 pt-4 text-left">
@@ -271,7 +270,7 @@ export default function RequestForm() {
                                     <div className="bg-emerald-50/50 border border-emerald-100 rounded-2xl p-5 flex items-center justify-between shadow-sm">
                                         <div>
                                             <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest flex items-center gap-1.5 mb-1">
-                                                <CheckCircle2 className="text-emerald-500" size={14} /> Verified Requester
+                                                <span className="text-emerald-500 font-bold">&#10003;</span> Verified Requester
                                             </p>
                                             <p className="font-mono text-sm font-bold text-stone-800">{email}</p>
                                         </div>
@@ -298,7 +297,7 @@ export default function RequestForm() {
                                                 {!imagePreview ? (
                                                     <div className="relative w-full h-48 border-2 border-dashed border-stone-300 rounded-2xl bg-white hover:bg-emerald-50 hover:border-emerald-300 transition-all flex flex-col items-center justify-center cursor-pointer group shadow-sm">
                                                         <input required type="file" accept="image/*" onChange={handleImageChange} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-                                                        <div className="w-14 h-14 bg-stone-50 rounded-full flex items-center justify-center text-stone-400 group-hover:text-emerald-500 group-hover:bg-emerald-100/50 mb-3 group-hover:scale-110 transition-transform"><Camera size={24} /></div>
+                                                        <div className="w-14 h-14 bg-stone-50 rounded-full flex items-center justify-center text-stone-400 group-hover:text-emerald-500 group-hover:bg-emerald-100/50 mb-3 group-hover:scale-110 transition-transform"><span className="text-xs font-bold uppercase">Upload</span></div>
                                                         <p className="text-sm font-bold text-stone-600">Click or tap to upload photo</p>
                                                         <p className="text-xs text-stone-400 font-bold mt-1 uppercase tracking-widest">Required to proceed</p>
                                                     </div>
@@ -306,7 +305,7 @@ export default function RequestForm() {
                                                     <div className="relative w-full h-48 rounded-2xl overflow-hidden border-4 border-white shadow-lg group">
                                                         <img src={imagePreview} alt="Preview" className="w-full h-full object-cover object-top" />
                                                         <div className="absolute inset-0 bg-stone-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                                                            <button type="button" onClick={removeImage} className="bg-white text-stone-800 p-2.5 rounded-full hover:bg-red-50 hover:text-red-500 transition-colors shadow-lg"><X size={20} strokeWidth={3} /></button>
+                                                            <button type="button" onClick={removeImage} className="bg-white text-stone-800 p-2.5 rounded-full hover:bg-red-50 hover:text-red-500 transition-colors shadow-lg"><span className="font-bold text-xl">&#10005;</span></button>
                                                         </div>
                                                     </div>
                                                 )}
@@ -363,7 +362,7 @@ export default function RequestForm() {
                                     </div>
 
                                     <button type="submit" disabled={isSubmitDisabled} className="w-full h-14 mt-8 inline-flex items-center justify-center rounded-xl bg-emerald-500 text-white font-bold transition-all hover:bg-emerald-600 shadow-lg shadow-emerald-500/20 active:scale-[0.98] disabled:opacity-50 disabled:bg-stone-200 disabled:text-stone-400 disabled:cursor-not-allowed disabled:shadow-none">
-                                        {loading ? <span className="flex items-center gap-2"><UploadCloud className="animate-bounce" size={20} /> Processing & Uploading...</span> : 'Submit Final Request'}
+                                        {loading ? <span className="flex items-center gap-2">Processing & Uploading...</span> : 'Submit Final Request'}
                                     </button>
                                 </motion.form>
                             )}
@@ -374,7 +373,7 @@ export default function RequestForm() {
                                     animate={{ opacity: 1, scale: 1 }}
                                     className="text-center space-y-8 py-6 w-full"
                                 >
-                                    <div className="w-20 h-20 bg-emerald-500 rounded-3xl flex items-center justify-center mx-auto text-white mb-6 shadow-xl shadow-emerald-500/20"><CheckCircle2 size={40} strokeWidth={2.5} /></div>
+                                    <div className="w-20 h-20 bg-emerald-500 rounded-3xl flex items-center justify-center mx-auto text-white mb-6 shadow-xl shadow-emerald-500/20"><span className="text-4xl font-bold">&#10003;</span></div>
                                     <div>
                                         <h3 className="font-heading font-extrabold text-3xl text-stone-800 mb-2">Success!</h3>
                                         <p className="text-sm text-stone-500 font-medium max-w-sm mx-auto">Your request for <strong className="text-stone-700">{formData.documentType}</strong> has been securely logged.</p>
@@ -392,7 +391,7 @@ export default function RequestForm() {
                                                 >
                                                     {({ loading: pdfLoading }) => (
                                                         <button disabled={pdfLoading} className="group relative inline-flex h-14 w-full sm:w-auto items-center justify-center gap-3 bg-stone-800 text-white px-8 rounded-xl font-bold transition-all hover:bg-black active:scale-[0.98] disabled:opacity-50 shadow-lg">
-                                                            <Download size={20} className="group-hover:-translate-y-1 transition-transform" /> {pdfLoading ? 'Generating...' : 'Download PDF Now'}
+                                                            {pdfLoading ? 'Generating...' : 'Download PDF Now'}
                                                         </button>
                                                     )}
                                                 </PDFDownloadLink>
@@ -400,7 +399,7 @@ export default function RequestForm() {
                                             </div>
                                         ) : (
                                             <div className="flex flex-col items-center">
-                                                <div className="w-14 h-14 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 mb-4 shadow-inner"><MapPin size={24} /></div>
+
                                                 <h4 className="font-heading font-extrabold text-stone-800 text-xl mb-2">Onsite Pickup</h4>
                                                 <p className="text-sm text-stone-500 font-medium leading-relaxed max-w-xs">Proceed to Tuyom Barangay Hall during office hours. Present your valid ID upon claiming.</p>
 

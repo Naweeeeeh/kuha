@@ -1,26 +1,23 @@
 import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
-import { ArrowRight, Target, Heart, Leaf, Users, Shield, Zap } from "lucide-react";
+
 import missionVisionImg from "../assets/mission-vision-img.jpg";
 
 export default function VisionMission() {
   const visionPoints = [
     {
-      icon: Target,
       title: "Community-Centered",
       desc: "A barangay where the voices of every resident matter in shaping our collective future.",
       color: "text-emerald-600",
       bg: "bg-emerald-100/80"
     },
     {
-      icon: Leaf,
       title: "Sustainable Growth",
       desc: "Balancing economic development with environmental stewardship for generations to come.",
       color: "text-teal-600",
       bg: "bg-teal-100/80"
     },
     {
-      icon: Heart,
       title: "Inclusive & Equitable",
       desc: "Ensuring every resident has access to opportunities, services, and support.",
       color: "text-rose-600",
@@ -30,22 +27,18 @@ export default function VisionMission() {
 
   const missionPoints = [
     {
-      icon: Users,
       title: "Strengthen Community Bonds",
       desc: "Foster unity and cooperation through active community programs and events."
     },
     {
-      icon: Shield,
       title: "Ensure Safety & Security",
       desc: "Maintain peace and order while protecting the rights and welfare of all residents."
     },
     {
-      icon: Zap,
       title: "Drive Sustainable Development",
       desc: "Implement programs that promote economic growth while protecting our environment."
     },
     {
-      icon: Leaf,
       title: "Promote Environmental Care",
       desc: "Lead initiatives for clean water, green spaces, and climate action."
     }
@@ -65,7 +58,7 @@ export default function VisionMission() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 font-sans selection:bg-emerald-200 selection:text-emerald-900">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-stone-50 to-emerald-100/50 font-sans selection:bg-emerald-200 selection:text-emerald-900">
 
       {/* HERO SECTION */}
       <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden bg-[#0A2318]">
@@ -160,9 +153,7 @@ export default function VisionMission() {
                 whileHover={{ y: -8 }}
                 className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] border border-stone-100 overflow-hidden p-8 group cursor-default transition-all duration-300"
               >
-                <div className={`w-16 h-16 rounded-2xl ${point.bg} flex items-center justify-center ${point.color} mb-5 group-hover:scale-110 transition-transform duration-300`}>
-                  <point.icon size={32} strokeWidth={2} />
-                </div>
+
                 <h3 className="font-extrabold text-stone-800 text-2xl mb-3 group-hover:text-emerald-600 transition-colors">
                   {point.title}
                 </h3>
@@ -233,9 +224,7 @@ export default function VisionMission() {
                 className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] border border-stone-100 overflow-hidden p-8 group cursor-default transition-all duration-300"
               >
                 <div className="flex items-start gap-6">
-                  <div className="w-14 h-14 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0 group-hover:scale-110 transition-transform duration-300">
-                    <point.icon size={28} strokeWidth={2} />
-                  </div>
+
                   <div className="flex-1">
                     <h3 className="font-extrabold text-stone-800 text-xl mb-2 group-hover:text-emerald-600 transition-colors">
                       {point.title}
@@ -276,7 +265,7 @@ export default function VisionMission() {
               className="group w-full md:w-auto flex items-center justify-center gap-3 bg-emerald-500 text-white py-5 px-10 rounded-full font-bold text-xl shadow-[0_8px_30px_0_rgba(16,185,129,0.3)] transition-all hover:scale-105 hover:bg-emerald-400 shrink-0"
             >
               <span>Mail Us</span>
-              <ArrowRight size={26} className="group-hover:translate-x-1 transition-transform" />
+              <span className="font-bold text-xl ml-2 group-hover:translate-x-1 transition-transform">&rarr;</span>
             </Link>
           </div>
         </motion.div>

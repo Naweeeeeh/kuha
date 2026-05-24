@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
+
 import { motion } from "framer-motion";
 
 import image1 from "../assets/tower.png";
@@ -90,7 +90,7 @@ export default function HeritagePage() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-t from-emerald-300 via-teal-200 to-white font-sans flex flex-col">
+    <div className="w-full min-h-screen bg-gradient-to-br from-emerald-50 via-stone-50 to-emerald-100/50 font-sans flex flex-col">
 
       <section className="relative flex flex-col justify-center pt-20">
         <div className="max-w-6xl mx-auto px-6 w-full">
@@ -105,10 +105,10 @@ export default function HeritagePage() {
             </motion.p>
 
             <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-8xl font-black text-stone-900 tracking-tight leading-[1.05] mb-8 drop-shadow-sm">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-800 via-teal-700 to-emerald-900">
+              <span className="text-emerald-800">
                 Tuyom's
               </span> <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E17100] via-[#FF9F43] to-[#E17100]">
+              <span className="text-[#E17100]">
                 Heritage
               </span>
             </motion.h1>
@@ -125,7 +125,7 @@ export default function HeritagePage() {
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="h-1 bg-gradient-to-r from-transparent via-emerald-800 to-transparent my-25"
+          className="h-1 bg-emerald-800 my-25"
         ></motion.div>
 
       <section className="w-full flex flex-col relative pb-8">
@@ -135,9 +135,8 @@ export default function HeritagePage() {
           <button 
             onClick={handlePrevious}
             className="absolute z-20 left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-black/40 hover:bg-black/60 rounded-full flex items-center justify-center text-white/90 hover:text-white transition-all focus:outline-none hover:scale-105 active:scale-95"
-            aria-label="Previous"
           >
-            <ArrowLeft size={32} strokeWidth={2.5} />
+            <span className="text-xl font-bold">&larr;</span>
           </button>
 
           <div className="w-full max-w-7xl h-[65vh] flex flex-col md:flex-row gap-8 md:gap-12">
@@ -154,7 +153,6 @@ export default function HeritagePage() {
             <div className="w-full md:w-1/2 h-full bg-white border-4 border-white rounded-3xl p-8 md:p-12 flex flex-col shadow-xl overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-stone-300 [&::-webkit-scrollbar-thumb]:rounded-full">
               
               <span className="inline-flex w-fit items-center gap-1.5 px-3 py-1 mb-6 text-xs font-bold uppercase tracking-widest text-emerald-700 bg-emerald-50 rounded-md">
-                <MapPin size={14} strokeWidth={2.5} />
                 {slideData[currentIndex].category}
               </span>
               
@@ -173,9 +171,8 @@ export default function HeritagePage() {
           <button 
             onClick={handleNext}
             className="absolute z-20 right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-black/40 hover:bg-black/60 rounded-full flex items-center justify-center text-white/90 hover:text-white transition-all focus:outline-none hover:scale-105 active:scale-95"
-            aria-label="Next"
           >
-            <ArrowRight size={32} strokeWidth={2.5} />
+            <span className="text-xl font-bold">&rarr;</span>
           </button>
 
         </div>

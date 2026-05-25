@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import missionVisionImg from "../assets/mission-vision-img.jpg";
@@ -9,57 +9,60 @@ export default function VisionMission() {
       title: "Community-Centered",
       desc: "A barangay where the voices of every resident matter in shaping our collective future.",
       color: "text-emerald-600",
-      bg: "bg-emerald-100/80"
+      bg: "bg-emerald-100/80",
     },
     {
       title: "Sustainable Growth",
       desc: "Balancing economic development with environmental stewardship for generations to come.",
       color: "text-teal-600",
-      bg: "bg-teal-100/80"
+      bg: "bg-teal-100/80",
     },
     {
       title: "Inclusive & Equitable",
       desc: "Ensuring every resident has access to opportunities, services, and support.",
       color: "text-rose-600",
-      bg: "bg-rose-100/80"
-    }
+      bg: "bg-rose-100/80",
+    },
   ];
 
   const missionPoints = [
     {
       title: "Strengthen Community Bonds",
-      desc: "Foster unity and cooperation through active community programs and events."
+      desc: "Foster unity and cooperation through active community programs and events.",
     },
     {
       title: "Ensure Safety & Security",
-      desc: "Maintain peace and order while protecting the rights and welfare of all residents."
+      desc: "Maintain peace and order while protecting the rights and welfare of all residents.",
     },
     {
       title: "Drive Sustainable Development",
-      desc: "Implement programs that promote economic growth while protecting our environment."
+      desc: "Implement programs that promote economic growth while protecting our environment.",
     },
     {
       title: "Promote Environmental Care",
-      desc: "Lead initiatives for clean water, green spaces, and climate action."
-    }
+      desc: "Lead initiatives for clean water, green spaces, and climate action.",
+    },
   ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.15 }
-    }
+      transition: { staggerChildren: 0.15 },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 300, damping: 24 },
+    },
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-stone-50 to-emerald-100/50 font-sans selection:bg-emerald-200 selection:text-emerald-900">
-
       {/* HERO SECTION */}
       <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden bg-[#0A2318]">
         <div className="absolute inset-0 z-0">
@@ -79,30 +82,40 @@ export default function VisionMission() {
             variants={containerVariants}
             className="max-w-3xl"
           >
-            <motion.p variants={itemVariants} className="text-emerald-300 font-bold text-lg uppercase tracking-wider mb-4">
+            <motion.p
+              variants={itemVariants}
+              className="text-emerald-300 font-bold text-lg uppercase tracking-wider mb-4"
+            >
               Our Direction
             </motion.p>
 
-            <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight leading-[1.05] mb-6">
+            <motion.h1
+              variants={itemVariants}
+              className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight leading-[1.05] mb-6"
+            >
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-emerald-100">
                 Vision
-              </span> & <br />
+              </span>{" "}
+              & <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E17100] via-yellow to-white">
                 Mission
               </span>
             </motion.h1>
 
-            <motion.p variants={itemVariants} className="text-lg md:text-xl text-emerald-50 max-w-2xl leading-relaxed mb-10 font-medium">
-              Guided by our commitment to progress, we envision a barangay where every resident thrives in a safe, inclusive, and sustainable community.
+            <motion.p
+              variants={itemVariants}
+              className="text-lg md:text-xl text-emerald-50 max-w-2xl leading-relaxed mb-10 font-medium"
+            >
+              Guided by our commitment to progress, we envision a barangay where
+              every resident thrives in a safe, inclusive, and sustainable
+              community.
             </motion.p>
-
           </motion.div>
         </div>
       </section>
 
       {/* MAIN CONTENT */}
       <div className="max-w-6xl mx-auto px-6 py-24">
-
         {/* VISION SECTION */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -135,7 +148,12 @@ export default function VisionMission() {
               transition={{ delay: 0.1 }}
               className="text-xl text-stone-600 leading-relaxed max-w-full text-justify"
             >
-              We envision Barangay Tuyom as a thriving community where sustainable development, environmental stewardship, and social inclusivity converge. A place where every resident is empowered to contribute, where opportunities abound, and where our shared commitment to progress creates lasting positive change for generations to come.
+              We envision Barangay Tuyom as a thriving community where
+              sustainable development, environmental stewardship, and social
+              inclusivity converge. A place where every resident is empowered to
+              contribute, where opportunities abound, and where our shared
+              commitment to progress creates lasting positive change for
+              generations to come.
             </motion.p>
           </div>
 
@@ -153,7 +171,6 @@ export default function VisionMission() {
                 whileHover={{ y: -8 }}
                 className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] border border-stone-100 overflow-hidden p-8 group cursor-default transition-all duration-300"
               >
-
                 <h3 className="font-extrabold text-stone-800 text-2xl mb-3 group-hover:text-emerald-600 transition-colors">
                   {point.title}
                 </h3>
@@ -205,7 +222,11 @@ export default function VisionMission() {
               transition={{ delay: 0.1 }}
               className="text-xl text-stone-600 leading-relaxed max-w-full text-justify"
             >
-              To serve all residents with integrity, transparency, and dedication. We commit to delivering responsive public services, promoting community engagement, and implementing programs that address the needs of every family while fostering pride in our barangay.
+              To serve all residents with integrity, transparency, and
+              dedication. We commit to delivering responsive public services,
+              promoting community engagement, and implementing programs that
+              address the needs of every family while fostering pride in our
+              barangay.
             </motion.p>
           </div>
 
@@ -224,7 +245,6 @@ export default function VisionMission() {
                 className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] border border-stone-100 overflow-hidden p-8 group cursor-default transition-all duration-300"
               >
                 <div className="flex items-start gap-6">
-
                   <div className="flex-1">
                     <h3 className="font-extrabold text-stone-800 text-xl mb-2 group-hover:text-emerald-600 transition-colors">
                       {point.title}
@@ -256,7 +276,8 @@ export default function VisionMission() {
                 Help us achieve our vision
               </h3>
               <p className="text-stone-400 text-lg md:text-xl leading-relaxed">
-                Every voice matters. Participate in community programs, share your ideas, and help us build a better barangay together.
+                Every voice matters. Participate in community programs, share
+                your ideas, and help us build a better barangay together.
               </p>
             </div>
 
@@ -265,11 +286,12 @@ export default function VisionMission() {
               className="group w-full md:w-auto flex items-center justify-center gap-3 bg-emerald-500 text-white py-5 px-10 rounded-full font-bold text-xl shadow-[0_8px_30px_0_rgba(16,185,129,0.3)] transition-all hover:scale-105 hover:bg-emerald-400 shrink-0"
             >
               <span>Mail Us</span>
-              <span className="font-bold text-xl ml-2 group-hover:translate-x-1 transition-transform">&rarr;</span>
+              <span className="font-bold text-xl ml-2 group-hover:translate-x-1 transition-transform">
+                &rarr;
+              </span>
             </Link>
           </div>
         </motion.div>
-
       </div>
     </div>
   );
